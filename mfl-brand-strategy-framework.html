@@ -205,8 +205,60 @@
 
   footer { text-align: center; color: var(--dim); font-size: 13px; padding-top: 40px; border-top: 1px solid var(--line); margin-top: 60px; }
 
+  /* ---------- Concept takeaway ---------- */
+  .concept .take { display: block; color: var(--text); font-weight: 700; font-size: 14.5px; margin-bottom: 5px; }
+  .concept .desc { margin: 0; color: var(--muted); font-size: 13.5px; }
+
+  /* ---------- Category legend ---------- */
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 6px 0 4px; }
+  .legend-item { display: flex; align-items: center; gap: 9px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; flex: 1; min-width: 180px; }
+  .legend-item .lg-dot { width: 14px; height: 14px; border-radius: 4px; flex: none; }
+  .legend-item .lg-name { font-weight: 800; }
+  .legend-item .lg-meta { color: var(--dim); font-size: 12.5px; margin-left: auto; }
+  .legend-item .lg-sub { display: block; color: var(--muted); font-size: 12.5px; font-weight: 400; margin-top: 2px; }
+
+  /* ---------- Content map accordion ---------- */
+  .map-toolbar { display: flex; justify-content: flex-end; margin: 4px 0 10px; }
+  .map-toolbar button { background: var(--surface-2); color: var(--muted); border: 1px solid var(--line); border-radius: 9px; padding: 7px 14px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; }
+  .map-toolbar button:hover { color: #fff; border-color: var(--accent); }
+  .cat-divider { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 17px; margin: 28px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  .cat-divider .cd-dot { width: 12px; height: 12px; border-radius: 50%; }
+  .cat-divider .cd-meta { margin-left: auto; font-size: 12px; font-weight: 500; color: var(--dim); }
+  details.map-block { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--line); border-radius: 12px; margin: 10px 0; overflow: hidden; }
+  details.map-block.crm { border-left-color: var(--crm); }
+  details.map-block.pmf { border-left-color: var(--pmf); }
+  details.map-block.lmf { border-left-color: var(--lmf); }
+  details.map-block > summary { list-style: none; cursor: pointer; padding: 15px 18px; font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 10px; user-select: none; }
+  details.map-block > summary::-webkit-details-marker { display: none; }
+  details.map-block > summary::before { content: "▸"; color: var(--dim); font-size: 12px; transition: transform .15s; }
+  details.map-block[open] > summary::before { transform: rotate(90deg); }
+  details.map-block > summary .count { margin-left: auto; font-size: 12px; font-weight: 600; color: var(--dim); background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; }
+  details.map-block table { border-radius: 0; }
+  details.map-block table tbody td:first-child { border-bottom: 1px solid var(--line); }
+  details.map-block > div.tbl { padding: 0 4px 4px; }
+
+  /* ---------- Completion / progress ---------- */
+  .progress-wrap { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; }
+  .progress-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
+  .progress-top .pct { font-size: 28px; font-weight: 900; color: var(--ok); }
+  .progress-top .lbl { color: var(--muted); font-size: 13px; }
+  .bar { height: 12px; border-radius: 999px; background: var(--surface-2); overflow: hidden; border: 1px solid var(--line); }
+  .bar > i { display: block; height: 100%; background: linear-gradient(90deg, var(--ok), #2a9442); }
+  .phase-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: 16px; }
+  .phase { text-align: center; padding: 12px 6px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface-2); font-size: 12px; }
+  .phase.done { background: rgba(63,185,80,.12); border-color: rgba(63,185,80,.4); }
+  .phase .ph-no { font-weight: 900; font-size: 13px; display: block; }
+  .phase.done .ph-no { color: var(--ok); }
+  .phase.pending .ph-no { color: var(--dim); }
+  .phase .ph-name { color: var(--muted); display: block; margin-top: 3px; line-height: 1.35; }
+  .status-chip { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; }
+  .status-chip.done { background: rgba(63,185,80,.18); color: var(--ok); }
+  .status-chip.todo { background: var(--surface-2); color: var(--dim); border: 1px solid var(--line); }
+
   @media (max-width: 680px) {
     .grid.cols-2, .grid.cols-3 { grid-template-columns: 1fr; }
+    .phase-grid { grid-template-columns: repeat(2, 1fr); }
+    .legend-item { min-width: 100%; }
     tbody td:first-child, tbody td:nth-child(2) { width: auto; }
     table, thead, tbody, th, td, tr { display: block; }
     thead { display: none; }
@@ -321,30 +373,31 @@
   <!-- 3. 전략 컨셉 -->
   <section id="concept">
     <div class="sec-head"><div class="sec-num">3</div><h2>전략 컨셉 &amp; 키워드</h2><span class="tag">전략에 따라 바뀜</span></div>
-    <div class="grid cols-3">
-      <div class="mini"><div class="k">Thesis</div><div class="v">AI·데이터·마케팅에서 올바르게 성장하는 가장 빠른 방법은 본질을 찾는 것.</div></div>
-      <div class="mini"><div class="k">각도</div><div class="v">AI는 기본값, 차이는 검증.</div></div>
-      <div class="mini"><div class="k">관통 원칙</div><div class="v">모든 컨셉은 스케일이 복리가 되느냐 돈을 태우느냐를 가르는 숨은 변수다.</div></div>
+    <p style="color:var(--muted);margin-bottom:18px">아래 <b style="color:var(--text)">12개 컨셉</b>은 모두 위 <b style="color:var(--text)">관통 원칙 — "AI는 기본값, 차이는 검증"</b>을 세 영역에 적용한 것입니다. 각 컨셉은 "스케일이 복리가 되느냐, 돈을 태우느냐"를 가르는 숨은 변수를 짚습니다.</p>
+    <div class="legend">
+      <div class="legend-item"><span class="lg-dot" style="background:var(--crm)"></span><span><span class="lg-name">CRM</span><span class="lg-sub">고객 관계 · 자동화 · 측정</span></span><span class="lg-meta">5개</span></div>
+      <div class="legend-item"><span class="lg-dot" style="background:var(--pmf)"></span><span><span class="lg-name">PMF</span><span class="lg-sub">Product–Market Fit</span></span><span class="lg-meta">3개</span></div>
+      <div class="legend-item"><span class="lg-dot" style="background:var(--lmf)"></span><span><span class="lg-name">LMF</span><span class="lg-sub">Language–Market Fit</span></span><span class="lg-meta">4개</span></div>
     </div>
 
-    <div class="cat-head"><span class="dot crm"></span> CRM <span class="sub">고객 관계 · 자동화 · 측정</span></div>
-    <div class="concept crm"><div class="no">1</div><div><h4>데이터 해자 — 모델이 아니라 결과 데이터가 자산</h4><p>AI가 모델을 평준화시키니까 유일한 해자는 당신만 가진 의사결정·결과 데이터다. 베낄 수 없는 건 도구가 아니라 쌓인 데이터.</p></div></div>
-    <div class="concept crm"><div class="no">2</div><div><h4>목표가 곧 전략 — 에이전트는 틀린 목표까지 빠르게 최적화한다</h4><p>유일한 레버는 '무슨 목표를 주느냐'. 살짝 틀린 목표는 기계 속도로 잔인하게 최적화돼 망한다(Goodhart). 목표·보상 설계가 전장.</p></div></div>
-    <div class="concept crm"><div class="no">3</div><div><h4>빠른 대리지표 vs 느린 진실</h4><p>리텐션·LTV는 몇 주 걸리는데 에이전트는 즉시 클릭·오픈으로 최적화. 방치하면 장기가치를 단기 대리지표로 팔아먹는다.</p></div></div>
-    <div class="concept crm"><div class="no">4</div><div><h4>메시지에서 서비스 표면으로 (전장 이동)</h4><p>CRM이 메시지 채널을 떠나 자사몰의 검색·진열·가격·실시간 추천으로 이동 중. 전장은 메시지가 아니라 자사몰 자체.</p></div></div>
-    <div class="concept crm"><div class="no">5</div><div><h4>고객 쪽에도 AI가 있다 (machine-to-machine CRM)</h4><p>고객도 받은 메시지를 AI가 요약·필터·구매 대리. CRM은 사람의 감정이 아니라 고객 에이전트가 읽는 판단 기준을 상대한다. 선점 가치 큼.</p></div></div>
+    <div class="cat-head"><span class="dot crm"></span> CRM <span class="sub">고객 관계 · 자동화 · 측정 · 5개 컨셉</span></div>
+    <div class="concept crm"><div class="no">1</div><div><h4>데이터 해자 — 모델이 아니라 결과 데이터가 자산</h4><span class="take">베낄 수 없는 건 도구가 아니라, 당신이 쌓아온 결과 데이터다.</span><p class="desc">AI가 모델을 평준화시키니까 유일한 해자는 당신만 가진 의사결정·결과 데이터.</p></div></div>
+    <div class="concept crm"><div class="no">2</div><div><h4>목표가 곧 전략 — 에이전트는 틀린 목표까지 빠르게 최적화한다</h4><span class="take">자동화의 진짜 레버는 실행이 아니라 "무슨 목표를 주느냐"다.</span><p class="desc">살짝 틀린 목표는 기계 속도로 잔인하게 최적화돼 망한다(Goodhart). 목표·보상 설계가 전장.</p></div></div>
+    <div class="concept crm"><div class="no">3</div><div><h4>빠른 대리지표 vs 느린 진실</h4><span class="take">방치하면 장기가치를 단기 대리지표로 팔아먹는다.</span><p class="desc">리텐션·LTV는 몇 주 걸리는데 에이전트는 즉시 클릭·오픈으로 최적화한다.</p></div></div>
+    <div class="concept crm"><div class="no">4</div><div><h4>메시지에서 서비스 표면으로 (전장 이동)</h4><span class="take">마케터의 전장은 메일함이 아니라 자사몰 자체로 옮겨갔다.</span><p class="desc">CRM이 메시지 채널을 떠나 검색·진열·가격·실시간 추천으로 이동 중.</p></div></div>
+    <div class="concept crm"><div class="no">5</div><div><h4>고객 쪽에도 AI가 있다 (machine-to-machine CRM)</h4><span class="take">설득 상대가 사람의 감정에서 고객 에이전트의 판단 기준으로 바뀐다.</span><p class="desc">고객도 받은 메시지를 AI가 요약·필터·구매 대리. 아직 송신자 관점이 비어 있어 선점 가치 큼.</p></div></div>
 
-    <div class="cat-head"><span class="dot pmf"></span> PMF <span class="sub">Product–Market Fit</span></div>
-    <div class="concept pmf"><div class="no">6</div><div><h4>PMF는 이제 복제 가능하다 — 달성이 아니라 유지가 문제</h4><p>fit을 만든 기능을 몇 주 만에 베낀다. PMF는 유통기한 있는 상태. AI가 못 베끼는 것(데이터·유통·신뢰)으로 지키는 게 게임. MMP가 조기 경보.</p></div></div>
-    <div class="concept pmf"><div class="no">7</div><div><h4>측정 지연 &gt; 시장 변화 속도</h4><p>8주 코호트로 확인하는 동안 AI 시장은 2주마다 바뀐다. 후행 LTV만 보면 늘 늦고, 선행 행동 신호를 빨리 읽는 쪽이 이긴다.</p></div></div>
-    <div class="concept pmf"><div class="no">8</div><div><h4>다음 사용자는 사람이 아니라 에이전트다 (Product–Agent Fit)</h4><p>fit 기준이 "사람에게 맞나"에서 "에이전트가 쓸 수 있나"로 이동. 사람용 온보딩·UI·API는 에이전트한텐 fit 0.</p></div></div>
+    <div class="cat-head"><span class="dot pmf"></span> PMF <span class="sub">Product–Market Fit · 3개 컨셉</span></div>
+    <div class="concept pmf"><div class="no">6</div><div><h4>PMF는 이제 복제 가능하다 — 달성이 아니라 유지가 문제</h4><span class="take">PMF는 해자가 아니라 유통기한 있는 상태 — 지키는 게 게임이다.</span><p class="desc">fit을 만든 기능을 몇 주 만에 베낀다. AI가 못 베끼는 것(데이터·유통·신뢰)으로 방어. MMP가 조기 경보.</p></div></div>
+    <div class="concept pmf"><div class="no">7</div><div><h4>측정 지연 &gt; 시장 변화 속도</h4><span class="take">선행 행동 신호를 빨리 읽는 쪽이 이긴다.</span><p class="desc">8주 코호트로 확인하는 동안 AI 시장은 2주마다 바뀐다. 후행 LTV만 보면 늘 늦는다.</p></div></div>
+    <div class="concept pmf"><div class="no">8</div><div><h4>다음 사용자는 사람이 아니라 에이전트다 (Product–Agent Fit)</h4><span class="take">fit 기준이 "사람에게 맞나"에서 "에이전트가 쓸 수 있나"로 이동한다.</span><p class="desc">사람용으로만 설계된 온보딩·UI·API는 에이전트한텐 fit 0.</p></div></div>
 
-    <div class="cat-head"><span class="dot lmf"></span> LMF <span class="sub">Language–Market Fit · 메시지 fit</span></div>
+    <div class="cat-head"><span class="dot lmf"></span> LMF <span class="sub">Language–Market Fit · 메시지 fit · 4개 컨셉</span></div>
     <p style="color:var(--muted);font-size:14px;margin-top:-2px">LMF는 PMF의 하위가 아니라 <b style="color:var(--text)">별개 실패 모드</b> — 제품은 맞는데 말이 안 닿아 시장이 못 알아보는 경우.</p>
-    <div class="concept lmf"><div class="no">9</div><div><h4>틀린 언어는 틀린 고객을 데려온다</h4><p>메시지가 안 맞으면 잘못된 고객이 와서 금방 이탈 → 리텐션·PMF 데이터가 망가지고 "제품 문제"로 오진된다. 실은 LMF 문제.</p></div></div>
-    <div class="concept lmf"><div class="no">10</div><div><h4>네 언어는 네가 객관적으로 못 본다</h4><p>제품에 너무 가까워 "다들 알아듣겠지"가 가장 위험한 가짜 신호. 회의실 합의는 시장 합의가 아니다 — 시장 행동으로 측정.</p></div></div>
-    <div class="concept lmf"><div class="no">11</div><div><h4>언어에도 반감기가 있다</h4><p>통하는 말은 경쟁사가 베껴 곧 모두의 말이 된다. LMF도 PMF처럼 유지 게임 — 언제 평준화됐는지 계속 추적.</p></div></div>
-    <div class="concept lmf"><div class="no">12</div><div><h4>AI가 카피를 동질화한다</h4><p>다 같은 LLM으로 쓰면 표현으론 차별화 안 됨. 무게중심이 '문구의 세련됨'에서 '말 속의 증거'(검증된 숫자·결과)로 이동.</p></div></div>
+    <div class="concept lmf"><div class="no">9</div><div><h4>틀린 언어는 틀린 고객을 데려온다</h4><span class="take">'고객이 안 남는다'의 절반은 제품이 아니라 언어 문제다.</span><p class="desc">메시지가 안 맞으면 엉뚱한 고객이 와서 이탈 → 리텐션이 망가지고 "제품 문제"로 오진된다.</p></div></div>
+    <div class="concept lmf"><div class="no">10</div><div><h4>네 언어는 네가 객관적으로 못 본다</h4><span class="take">회의실 합의는 시장 합의가 아니다.</span><p class="desc">제품에 너무 가까워 "다들 알아듣겠지"가 가장 위험한 가짜 신호. 시장 행동으로 측정해야 안다.</p></div></div>
+    <div class="concept lmf"><div class="no">11</div><div><h4>언어에도 반감기가 있다</h4><span class="take">통하는 말은 곧 모두의 말이 되어 차별화가 닳는다.</span><p class="desc">LMF도 PMF처럼 유지 게임 — 메시지가 언제 평준화됐는지 계속 추적해야 한다.</p></div></div>
+    <div class="concept lmf"><div class="no">12</div><div><h4>AI가 카피를 동질화한다</h4><span class="take">무게중심이 '문구의 세련됨'에서 '말 속의 증거'로 이동한다.</span><p class="desc">다 같은 LLM으로 쓰면 표현으론 차별화 안 됨 — 검증된 숫자·결과가 차별점.</p></div></div>
 
     <div class="callout" style="margin-top:26px">
       <div class="lbl">MMP WEAVE</div>
@@ -354,152 +407,176 @@
 
   <!-- 콘텐츠 맵 -->
   <section id="map">
-    <div class="sec-head"><div class="sec-num">＃</div><h2>키워드 &amp; 콘텐츠 맵</h2><span class="tag">대 3 / 소 12 / 실행 60</span></div>
-    <p style="color:var(--muted)">대카테고리(CRM/PMF/LMF) → 소카테고리(컨셉) → 실행 문장, 각 주제 아래 <b style="color:var(--text)">문제점·제안</b>. 톤 통일 적용.</p>
+    <div class="sec-head"><div class="sec-num">＃</div><h2>키워드 &amp; 콘텐츠 맵</h2><span class="tag">소주제 12 · 콘텐츠 주제 60</span></div>
+    <p style="color:var(--muted)">세 영역을 <b style="color:var(--text)">12개 소주제</b>로 나누고, 각 소주제마다 <b style="color:var(--text)">콘텐츠 주제 5개</b>를 잡았습니다. 각 주제는 <b style="color:var(--text)">고객의 고민 → 전달 메시지</b> 한 쌍으로 정리됩니다. 소주제 제목을 눌러 펼쳐 보세요.</p>
+    <div class="map-toolbar"><button id="mapToggle" type="button">전체 접기</button></div>
 
     <!-- CRM -->
-    <div class="cat-head"><span class="dot crm"></span> CRM</div>
+    <div class="cat-divider"><span class="cd-dot" style="background:var(--crm)"></span> CRM <span class="cd-meta">5개 소주제 · 25개 주제</span></div>
 
-    <div class="map-block"><div class="mb-head">· 데이터 해자</div>
-      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
-        <tr><td data-l="실행 문장">당신의 AI 스택은 경쟁사와 99% 똑같다</td><td data-l="문제점">다들 같은 모델·툴 쓰니까 "우리도 AI 써요"가 더는 자랑이 안 돼요</td><td data-l="제안">모델은 평준화됐고, 남는 차이는 당신이 굴리며 쌓은 결과 데이터 하나뿐이에요</td></tr>
-        <tr><td data-l="실행 문장">AI 시대에 유일하게 베낄 수 없는 것</td><td data-l="문제점">기능도 전략도 요즘은 몇 주면 따라잡혀요</td><td data-l="제안">안 베껴지는 건 당신이 결정하고 결과를 쌓아온 고유 데이터뿐 — 거기 투자해도 안 늦어요</td></tr>
-        <tr><td data-l="실행 문장">결과 데이터는 어떻게 해자가 되는가</td><td data-l="문제점">데이터를 쌓는다고 다 자산이 되진 않아요</td><td data-l="제안">"이렇게 결정했더니 이렇게 됐다" 루프가 남아야 다시 쓰이고, 그때부터 해자가 돼요</td></tr>
-        <tr><td data-l="실행 문장">도구는 평준화되고, 데이터는 복리로 쌓인다</td><td data-l="문제점">최신 툴에 돈 쓰는데 격차가 안 벌어지죠</td><td data-l="제안">툴은 남들도 사니까요 — 격차는 데이터를 얼마나 오래·제대로 쌓았느냐의 복리에서 나요</td></tr>
-        <tr><td data-l="실행 문장">우리 회사 데이터는 자산일까 그냥 로그일까</td><td data-l="문제점">데이터는 많은데 실제 결정엔 안 쓰이죠</td><td data-l="제안">재현 가능한 형태로 정리 안 돼 있으면 자산이 아니라 그냥 로그예요</td></tr>
+    <details class="map-block crm" open><summary class="mb-head">· 데이터 해자 <span class="count">5개 주제</span></summary>
+      <table><thead><tr><th>콘텐츠 주제</th><th>고객의 고민</th><th>전달 메시지</th></tr></thead><tbody>
+        <tr><td data-l="콘텐츠 주제">당신의 AI 스택은 경쟁사와 99% 똑같다</td><td data-l="고객의 고민">다들 같은 모델·툴 쓰니까 "우리도 AI 써요"가 더는 자랑이 안 돼요</td><td data-l="전달 메시지">모델은 평준화됐고, 남는 차이는 당신이 굴리며 쌓은 결과 데이터 하나뿐이에요</td></tr>
+        <tr><td data-l="콘텐츠 주제">AI 시대에 유일하게 베낄 수 없는 것</td><td data-l="고객의 고민">기능도 전략도 요즘은 몇 주면 따라잡혀요</td><td data-l="전달 메시지">안 베껴지는 건 당신이 결정하고 결과를 쌓아온 고유 데이터뿐 — 거기 투자해도 안 늦어요</td></tr>
+        <tr><td data-l="콘텐츠 주제">결과 데이터는 어떻게 해자가 되는가</td><td data-l="고객의 고민">데이터를 쌓는다고 다 자산이 되진 않아요</td><td data-l="전달 메시지">"이렇게 결정했더니 이렇게 됐다" 루프가 남아야 다시 쓰이고, 그때부터 해자가 돼요</td></tr>
+        <tr><td data-l="콘텐츠 주제">도구는 평준화되고, 데이터는 복리로 쌓인다</td><td data-l="고객의 고민">최신 툴에 돈 쓰는데 격차가 안 벌어지죠</td><td data-l="전달 메시지">툴은 남들도 사니까요 — 격차는 데이터를 얼마나 오래·제대로 쌓았느냐의 복리에서 나요</td></tr>
+        <tr><td data-l="콘텐츠 주제">우리 회사 데이터는 자산일까 그냥 로그일까</td><td data-l="고객의 고민">데이터는 많은데 실제 결정엔 안 쓰이죠</td><td data-l="전달 메시지">재현 가능한 형태로 정리 안 돼 있으면 자산이 아니라 그냥 로그예요</td></tr>
       </tbody></table>
-    </div>
+    </details>
 
-    <div class="map-block"><div class="mb-head">· 자율 최적화 통제</div>
-      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
-        <tr><td data-l="실행 문장">AI는 틀린 목표를 가장 빠르게 달성한다</td><td data-l="문제점">목표가 살짝 틀리면 에이전트가 그 틀린 걸 기계 속도로 밀어붙여요</td><td data-l="제안">자동화의 진짜 레버는 실행이 아니라 "무슨 목표를 주느냐"예요</td></tr>
-        <tr><td data-l="실행 문장">에이전트에게 마케팅을 맡기기 전 가장 먼저 정할 것</td><td data-l="문제점">다들 "어떻게 자동화할까"부터 고민하는데 순서가 틀렸어요</td><td data-l="제안">먼저 정할 건 목표·보상 함수 — 거기 안 잡히면 자동화할수록 빨리 틀려요</td></tr>
-        <tr><td data-l="실행 문장">지표가 목표가 되는 순간 망가진다 (Goodhart)</td><td data-l="문제점">KPI는 올랐는데 사업은 안 좋아진 적 있죠</td><td data-l="제안">대리지표를 목표로 박으면 그 숫자만 올리고 진짜 결과는 외면해요</td></tr>
-        <tr><td data-l="실행 문장">전술이 아니라 목표가 전장이다</td><td data-l="문제점">캠페인 디테일 만지는 데 시간 다 쓰는데 성과는 그대로죠</td><td data-l="제안">AI가 실행을 가져가면 쥐고 있어야 할 레버가 디테일이 아니라 목표로 옮겨가요</td></tr>
-        <tr><td data-l="실행 문장">자율 최적화를 폭주시키지 않는 가드레일</td><td data-l="문제점">자동 최적화를 켜두면 어디로 튈지 모르죠</td><td data-l="제안">목표·한계·측정 루프 세 개를 미리 걸어둬야 폭주를 막아요</td></tr>
+    <details class="map-block crm" open><summary class="mb-head">· 자율 최적화 통제 <span class="count">5개 주제</span></summary>
+      <table><thead><tr><th>콘텐츠 주제</th><th>고객의 고민</th><th>전달 메시지</th></tr></thead><tbody>
+        <tr><td data-l="콘텐츠 주제">AI는 틀린 목표를 가장 빠르게 달성한다</td><td data-l="고객의 고민">목표가 살짝 틀리면 에이전트가 그 틀린 걸 기계 속도로 밀어붙여요</td><td data-l="전달 메시지">자동화의 진짜 레버는 실행이 아니라 "무슨 목표를 주느냐"예요</td></tr>
+        <tr><td data-l="콘텐츠 주제">에이전트에게 마케팅을 맡기기 전 가장 먼저 정할 것</td><td data-l="고객의 고민">다들 "어떻게 자동화할까"부터 고민하는데 순서가 틀렸어요</td><td data-l="전달 메시지">먼저 정할 건 목표·보상 함수 — 거기 안 잡히면 자동화할수록 빨리 틀려요</td></tr>
+        <tr><td data-l="콘텐츠 주제">지표가 목표가 되는 순간 망가진다 (Goodhart)</td><td data-l="고객의 고민">KPI는 올랐는데 사업은 안 좋아진 적 있죠</td><td data-l="전달 메시지">대리지표를 목표로 박으면 그 숫자만 올리고 진짜 결과는 외면해요</td></tr>
+        <tr><td data-l="콘텐츠 주제">전술이 아니라 목표가 전장이다</td><td data-l="고객의 고민">캠페인 디테일 만지는 데 시간 다 쓰는데 성과는 그대로죠</td><td data-l="전달 메시지">AI가 실행을 가져가면 쥐고 있어야 할 레버가 디테일이 아니라 목표로 옮겨가요</td></tr>
+        <tr><td data-l="콘텐츠 주제">자율 최적화를 폭주시키지 않는 가드레일</td><td data-l="고객의 고민">자동 최적화를 켜두면 어디로 튈지 모르죠</td><td data-l="전달 메시지">목표·한계·측정 루프 세 개를 미리 걸어둬야 폭주를 막아요</td></tr>
       </tbody></table>
-    </div>
+    </details>
 
-    <div class="map-block"><div class="mb-head">· 성과 착시</div>
-      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
-        <tr><td data-l="실행 문장">오픈율은 오르는데 매출은 왜 빠질까</td><td data-l="문제점">대시보드는 파랗게 좋아지는데 매출은 안 따라오죠</td><td data-l="제안">빠른 지표와 돈 되는 느린 지표를 연결해서 안 보면 계속 착시에 속아요</td></tr>
-        <tr><td data-l="실행 문장">AI 에이전트가 LTV를 클릭으로 바꿔치기한다</td><td data-l="문제점">에이전트는 즉시 보이는 클릭·전환부터 올려요</td><td data-l="제안">그 과정에서 LTV를 야금야금 깎아요 — 단기 숫자로 장기 가치를 바꿔치기</td></tr>
-        <tr><td data-l="실행 문장">당신이 최적화하는 그 지표가 사실 대리지표인 이유</td><td data-l="문제점">열심히 올리는 그 지표, 진짜 성과랑 연결돼 있나요</td><td data-l="제안">대부분 측정하기 쉬워 고른 대리지표예요 — 목적과 대리부터 구분하세요</td></tr>
-        <tr><td data-l="실행 문장">성과가 좋아 보일 때가 가장 위험하다</td><td data-l="문제점">좋아 보이는 게 선행 대리지표뿐이면 진짜 문제는 후행으로 늦게 터져요</td><td data-l="제안">좋아 보일 때일수록 후행 진실로 한 번 검증하세요</td></tr>
-        <tr><td data-l="실행 문장">선행지표와 후행지표, 무엇으로 결정하는가</td><td data-l="문제점">빠른 지표로 정하면 틀리고, 느린 지표 기다리면 늦죠</td><td data-l="제안">답은 둘 중 하나가 아니라 연결 — 선행으로 움직이고 후행으로 보정하세요</td></tr>
+    <details class="map-block crm" open><summary class="mb-head">· 성과 착시 <span class="count">5개 주제</span></summary>
+      <table><thead><tr><th>콘텐츠 주제</th><th>고객의 고민</th><th>전달 메시지</th></tr></thead><tbody>
+        <tr><td data-l="콘텐츠 주제">오픈율은 오르는데 매출은 왜 빠질까</td><td data-l="고객의 고민">대시보드는 파랗게 좋아지는데 매출은 안 따라오죠</td><td data-l="전달 메시지">빠른 지표와 돈 되는 느린 지표를 연결해서 안 보면 계속 착시에 속아요</td></tr>
+        <tr><td data-l="콘텐츠 주제">AI 에이전트가 LTV를 클릭으로 바꿔치기한다</td><td data-l="고객의 고민">에이전트는 즉시 보이는 클릭·전환부터 올려요</td><td data-l="전달 메시지">그 과정에서 LTV를 야금야금 깎아요 — 단기 숫자로 장기 가치를 바꿔치기</td></tr>
+        <tr><td data-l="콘텐츠 주제">당신이 최적화하는 그 지표가 사실 대리지표인 이유</td><td data-l="고객의 고민">열심히 올리는 그 지표, 진짜 성과랑 연결돼 있나요</td><td data-l="전달 메시지">대부분 측정하기 쉬워 고른 대리지표예요 — 목적과 대리부터 구분하세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">성과가 좋아 보일 때가 가장 위험하다</td><td data-l="고객의 고민">좋아 보이는 게 선행 대리지표뿐이면 진짜 문제는 후행으로 늦게 터져요</td><td data-l="전달 메시지">좋아 보일 때일수록 후행 진실로 한 번 검증하세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">선행지표와 후행지표, 무엇으로 결정하는가</td><td data-l="고객의 고민">빠른 지표로 정하면 틀리고, 느린 지표 기다리면 늦죠</td><td data-l="전달 메시지">답은 둘 중 하나가 아니라 연결 — 선행으로 움직이고 후행으로 보정하세요</td></tr>
       </tbody></table>
-    </div>
+    </details>
 
-    <div class="map-block"><div class="mb-head">· 서비스 표면 개인화</div>
-      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
-        <tr><td data-l="실행 문장">CRM의 다음은 검색창과 가격표다</td><td data-l="문제점">CRM 하면 다들 메일·푸시부터 떠올리죠</td><td data-l="제안">고객이 실제 결정하는 자리는 검색·진열·가격 — 개인화의 다음 전장은 거기예요</td></tr>
-        <tr><td data-l="실행 문장">마케터의 전장은 더 이상 메일함이 아니다</td><td data-l="문제점">채널 메시지만 최적화하는데 전환이 안 늘죠</td><td data-l="제안">고객은 사이트 안에서 사고팝니다 — 전장이 옮겨갔어요</td></tr>
-        <tr><td data-l="실행 문장">검색·진열·가격, 개인화의 새 전선</td><td data-l="문제점">어디부터 개인화해야 효과가 큰지 모르겠다면</td><td data-l="제안">결정이 실제 일어나는 구매 직전 표면부터 — 메시지보다 전환에 직접 닿아요</td></tr>
-        <tr><td data-l="실행 문장">메시지만 보는 CRM이 놓치는 절반</td><td data-l="문제점">CRM을 "발송 도구"로만 쓰면 전장의 절반만 봐요</td><td data-l="제안">고객이 둘러보고 결정하는 서비스 표면을 측정·개인화 범위에 넣으세요</td></tr>
-        <tr><td data-l="실행 문장">마지막 클릭이 아니라 진열대에서 이긴다</td><td data-l="문제점">막판 리타게팅에만 예산 쏟는데 효율은 떨어지죠</td><td data-l="제안">승부는 진열대 앞에서 마음 정하는 순간에 갈려요 — 거기를 개인화하세요</td></tr>
+    <details class="map-block crm" open><summary class="mb-head">· 서비스 표면 개인화 <span class="count">5개 주제</span></summary>
+      <table><thead><tr><th>콘텐츠 주제</th><th>고객의 고민</th><th>전달 메시지</th></tr></thead><tbody>
+        <tr><td data-l="콘텐츠 주제">CRM의 다음은 검색창과 가격표다</td><td data-l="고객의 고민">CRM 하면 다들 메일·푸시부터 떠올리죠</td><td data-l="전달 메시지">고객이 실제 결정하는 자리는 검색·진열·가격 — 개인화의 다음 전장은 거기예요</td></tr>
+        <tr><td data-l="콘텐츠 주제">마케터의 전장은 더 이상 메일함이 아니다</td><td data-l="고객의 고민">채널 메시지만 최적화하는데 전환이 안 늘죠</td><td data-l="전달 메시지">고객은 사이트 안에서 사고팝니다 — 전장이 옮겨갔어요</td></tr>
+        <tr><td data-l="콘텐츠 주제">검색·진열·가격, 개인화의 새 전선</td><td data-l="고객의 고민">어디부터 개인화해야 효과가 큰지 모르겠다면</td><td data-l="전달 메시지">결정이 실제 일어나는 구매 직전 표면부터 — 메시지보다 전환에 직접 닿아요</td></tr>
+        <tr><td data-l="콘텐츠 주제">메시지만 보는 CRM이 놓치는 절반</td><td data-l="고객의 고민">CRM을 "발송 도구"로만 쓰면 전장의 절반만 봐요</td><td data-l="전달 메시지">고객이 둘러보고 결정하는 서비스 표면을 측정·개인화 범위에 넣으세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">마지막 클릭이 아니라 진열대에서 이긴다</td><td data-l="고객의 고민">막판 리타게팅에만 예산 쏟는데 효율은 떨어지죠</td><td data-l="전달 메시지">승부는 진열대 앞에서 마음 정하는 순간에 갈려요 — 거기를 개인화하세요</td></tr>
       </tbody></table>
-    </div>
+    </details>
 
-    <div class="map-block"><div class="mb-head">· 기계가 읽는 마케팅</div>
-      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
-        <tr><td data-l="실행 문장">당신의 메시지를 고객의 AI가 먼저 읽는다</td><td data-l="문제점">공들인 카피가 고객한테 그대로 안 닿아요</td><td data-l="제안">고객의 AI가 먼저 요약·필터하니까, 기계가 파싱할 신호를 설계해야 해요</td></tr>
-        <tr><td data-l="실행 문장">카피 톤보다 파싱 가능한 신호가 중요해진다</td><td data-l="문제점">감성 카피에 힘 주는데 전환이 안 따라오죠</td><td data-l="제안">기계가 끼면 분위기보다 가격·조건 같은 구조화된 신호가 먼저 읽혀요</td></tr>
-        <tr><td data-l="실행 문장">고객이 구매 판단을 에이전트에게 맡기기 시작했다</td><td data-l="문제점">사람을 설득하던 방식이 점점 안 먹혀요</td><td data-l="제안">설득 상대가 사람의 감정이 아니라 에이전트의 판단 기준으로 바뀌었어요</td></tr>
-        <tr><td data-l="실행 문장">machine-to-machine CRM, 무엇이 달라지나</td><td data-l="문제점">보내는 쪽도 받는 쪽도 기계가 되면 CRM이 완전히 달라져요</td><td data-l="제안">아직 송신자 관점에서 말하는 데가 없어요 — 지금 선점하면 카테고리를 먼저 가져가요</td></tr>
-        <tr><td data-l="실행 문장">사람의 감정이 아니라 기계의 판단 기준을 설계하라</td><td data-l="문제점">감정에 호소하던 카피가 에이전트한텐 그냥 노이즈예요</td><td data-l="제안">에이전트가 비교·선택하는 기준에 맞춰 정보를 구조화하세요</td></tr>
+    <details class="map-block crm" open><summary class="mb-head">· 기계가 읽는 마케팅 <span class="count">5개 주제</span></summary>
+      <table><thead><tr><th>콘텐츠 주제</th><th>고객의 고민</th><th>전달 메시지</th></tr></thead><tbody>
+        <tr><td data-l="콘텐츠 주제">당신의 메시지를 고객의 AI가 먼저 읽는다</td><td data-l="고객의 고민">공들인 카피가 고객한테 그대로 안 닿아요</td><td data-l="전달 메시지">고객의 AI가 먼저 요약·필터하니까, 기계가 파싱할 신호를 설계해야 해요</td></tr>
+        <tr><td data-l="콘텐츠 주제">카피 톤보다 파싱 가능한 신호가 중요해진다</td><td data-l="고객의 고민">감성 카피에 힘 주는데 전환이 안 따라오죠</td><td data-l="전달 메시지">기계가 끼면 분위기보다 가격·조건 같은 구조화된 신호가 먼저 읽혀요</td></tr>
+        <tr><td data-l="콘텐츠 주제">고객이 구매 판단을 에이전트에게 맡기기 시작했다</td><td data-l="고객의 고민">사람을 설득하던 방식이 점점 안 먹혀요</td><td data-l="전달 메시지">설득 상대가 사람의 감정이 아니라 에이전트의 판단 기준으로 바뀌었어요</td></tr>
+        <tr><td data-l="콘텐츠 주제">machine-to-machine CRM, 무엇이 달라지나</td><td data-l="고객의 고민">보내는 쪽도 받는 쪽도 기계가 되면 CRM이 완전히 달라져요</td><td data-l="전달 메시지">아직 송신자 관점에서 말하는 데가 없어요 — 지금 선점하면 카테고리를 먼저 가져가요</td></tr>
+        <tr><td data-l="콘텐츠 주제">사람의 감정이 아니라 기계의 판단 기준을 설계하라</td><td data-l="고객의 고민">감정에 호소하던 카피가 에이전트한텐 그냥 노이즈예요</td><td data-l="전달 메시지">에이전트가 비교·선택하는 기준에 맞춰 정보를 구조화하세요</td></tr>
       </tbody></table>
-    </div>
+    </details>
 
     <!-- PMF -->
-    <div class="cat-head"><span class="dot pmf"></span> PMF</div>
+    <div class="cat-divider"><span class="cd-dot" style="background:var(--pmf)"></span> PMF <span class="cd-meta">3개 소주제 · 15개 주제</span></div>
 
-    <div class="map-block"><div class="mb-head">· PMF 유지 게임</div>
-      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
-        <tr><td data-l="실행 문장">당신의 PMF에는 유통기한이 있다</td><td data-l="문제점">PMF 찍었다고 안심하는 순간이 제일 위험해요</td><td data-l="제안">AI가 fit 만든 기능을 몇 주면 베껴요 — 계속 닳는다 보고 운영하세요</td></tr>
-        <tr><td data-l="실행 문장">PMF는 찍는 게 아니라 지키는 것이다</td><td data-l="문제점">한 번 맞춘 fit이 자꾸 흔들리는 이유를 못 찾겠다면</td><td data-l="제안">전제가 틀린 거예요 — PMF는 유지 게임, 측정·자원을 거기 두세요</td></tr>
-        <tr><td data-l="실행 문장">AI가 못 베끼는 것으로 fit을 방어하는 법</td><td data-l="문제점">기능으로 만든 fit은 곧 따라잡혀요</td><td data-l="제안">데이터·유통·신뢰처럼 복제 안 되는 자산으로 무게중심을 옮겨야 지켜요</td></tr>
-        <tr><td data-l="실행 문장">복제당한 PMF는 어디서 먼저 드러나는가</td><td data-l="문제점">경쟁 세진 걸 보통 너무 늦게 알아채죠</td><td data-l="제안">가장 먼저 드러나는 건 신규 코호트 리텐션 하락 — 거기를 모니터링하세요</td></tr>
-        <tr><td data-l="실행 문장">기능은 2주면 베껴진다, 그다음은 무엇으로 버티나</td><td data-l="문제점">기능 경쟁만으론 격차가 안 유지돼요</td><td data-l="제안">그다음을 버티게 하는 건 데이터·관계처럼 시간으로만 쌓이는 것들이에요</td></tr>
+    <details class="map-block pmf" open><summary class="mb-head">· PMF 유지 게임 <span class="count">5개 주제</span></summary>
+      <table><thead><tr><th>콘텐츠 주제</th><th>고객의 고민</th><th>전달 메시지</th></tr></thead><tbody>
+        <tr><td data-l="콘텐츠 주제">당신의 PMF에는 유통기한이 있다</td><td data-l="고객의 고민">PMF 찍었다고 안심하는 순간이 제일 위험해요</td><td data-l="전달 메시지">AI가 fit 만든 기능을 몇 주면 베껴요 — 계속 닳는다 보고 운영하세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">PMF는 찍는 게 아니라 지키는 것이다</td><td data-l="고객의 고민">한 번 맞춘 fit이 자꾸 흔들리는 이유를 못 찾겠다면</td><td data-l="전달 메시지">전제가 틀린 거예요 — PMF는 유지 게임, 측정·자원을 거기 두세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">AI가 못 베끼는 것으로 fit을 방어하는 법</td><td data-l="고객의 고민">기능으로 만든 fit은 곧 따라잡혀요</td><td data-l="전달 메시지">데이터·유통·신뢰처럼 복제 안 되는 자산으로 무게중심을 옮겨야 지켜요</td></tr>
+        <tr><td data-l="콘텐츠 주제">복제당한 PMF는 어디서 먼저 드러나는가</td><td data-l="고객의 고민">경쟁 세진 걸 보통 너무 늦게 알아채죠</td><td data-l="전달 메시지">가장 먼저 드러나는 건 신규 코호트 리텐션 하락 — 거기를 모니터링하세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">기능은 2주면 베껴진다, 그다음은 무엇으로 버티나</td><td data-l="고객의 고민">기능 경쟁만으론 격차가 안 유지돼요</td><td data-l="전달 메시지">그다음을 버티게 하는 건 데이터·관계처럼 시간으로만 쌓이는 것들이에요</td></tr>
       </tbody></table>
-    </div>
+    </details>
 
-    <div class="map-block"><div class="mb-head">· 측정 시차</div>
-      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
-        <tr><td data-l="실행 문장">fit 데이터가 확정될 때 시장은 이미 바뀐다</td><td data-l="문제점">8주 코호트 검증하는 동안 AI 시장은 2주마다 바뀌어요</td><td data-l="제안">후행 검증만 믿으면 늘 한 박자 늦어요 — 선행 신호로 빨리 읽으세요</td></tr>
-        <tr><td data-l="실행 문장">LTV만 보면 늘 한 발 늦는 이유</td><td data-l="문제점">LTV는 정확하지만 느려서 결정이 사후약방문이 돼요</td><td data-l="제안">LTV를 미리 예측하게 해주는 선행 행동지표를 같이 보세요</td></tr>
-        <tr><td data-l="실행 문장">8주 코호트 vs 2주 시장, 측정이 못 따라간다</td><td data-l="문제점">측정 주기가 시장 변화 속도를 못 따라가는 게 진짜 문제예요</td><td data-l="제안">인정하고 선행지표 기반으로 빠르게 움직이세요</td></tr>
-        <tr><td data-l="실행 문장">후행지표의 함정에서 빠져나오기</td><td data-l="문제점">결과지표만 보면 늘 사건 끝난 뒤에 알게 돼요</td><td data-l="제안">선행으로 먼저 움직이고 후행으로 나중에 보정하는 구조로 가세요</td></tr>
-        <tr><td data-l="실행 문장">행동 신호를 먼저 읽는 쪽이 이긴다</td><td data-l="문제점">경쟁사보다 반응이 늘 한 박자 느리다면</td><td data-l="제안">초기 행동 신호를 측정 1순위로 올리면 결과 확정 전에 먼저 움직여요</td></tr>
+    <details class="map-block pmf" open><summary class="mb-head">· 측정 시차 <span class="count">5개 주제</span></summary>
+      <table><thead><tr><th>콘텐츠 주제</th><th>고객의 고민</th><th>전달 메시지</th></tr></thead><tbody>
+        <tr><td data-l="콘텐츠 주제">fit 데이터가 확정될 때 시장은 이미 바뀐다</td><td data-l="고객의 고민">8주 코호트 검증하는 동안 AI 시장은 2주마다 바뀌어요</td><td data-l="전달 메시지">후행 검증만 믿으면 늘 한 박자 늦어요 — 선행 신호로 빨리 읽으세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">LTV만 보면 늘 한 발 늦는 이유</td><td data-l="고객의 고민">LTV는 정확하지만 느려서 결정이 사후약방문이 돼요</td><td data-l="전달 메시지">LTV를 미리 예측하게 해주는 선행 행동지표를 같이 보세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">8주 코호트 vs 2주 시장, 측정이 못 따라간다</td><td data-l="고객의 고민">측정 주기가 시장 변화 속도를 못 따라가는 게 진짜 문제예요</td><td data-l="전달 메시지">인정하고 선행지표 기반으로 빠르게 움직이세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">후행지표의 함정에서 빠져나오기</td><td data-l="고객의 고민">결과지표만 보면 늘 사건 끝난 뒤에 알게 돼요</td><td data-l="전달 메시지">선행으로 먼저 움직이고 후행으로 나중에 보정하는 구조로 가세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">행동 신호를 먼저 읽는 쪽이 이긴다</td><td data-l="고객의 고민">경쟁사보다 반응이 늘 한 박자 느리다면</td><td data-l="전달 메시지">초기 행동 신호를 측정 1순위로 올리면 결과 확정 전에 먼저 움직여요</td></tr>
       </tbody></table>
-    </div>
+    </details>
 
-    <div class="map-block"><div class="mb-head">· Product-Agent Fit</div>
-      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
-        <tr><td data-l="실행 문장">당신의 다음 사용자는 사람이 아니다</td><td data-l="문제점">제품을 사람 기준으로만 설계하고 있죠</td><td data-l="제안">고객이 일을 에이전트한테 넘기면 다음 사용자는 기계 — 지금 대비하세요</td></tr>
-        <tr><td data-l="실행 문장">사람용 온보딩은 에이전트한텐 fit 0이다</td><td data-l="문제점">사람한테 친절한 온보딩·UI가 에이전트한텐 의미가 없어요</td><td data-l="제안">에이전트가 쓸 수 있게 API·구조 적합성을 따로 보세요</td></tr>
-        <tr><td data-l="실행 문장">에이전트 트래픽을 사람과 따로 측정해야 하는 이유</td><td data-l="문제점">에이전트 사용이 사람 데이터에 섞이면 아무것도 안 보여요</td><td data-l="제안">분리 측정해야 기계가 들어오는 새 전환 경로를 포착해요</td></tr>
-        <tr><td data-l="실행 문장">다음 UX는 사람이 아니라 기계를 위한 것</td><td data-l="문제점">UX를 사람 눈에만 맞춰왔죠</td><td data-l="제안">가독성 기준이 "사람이 보기 편한가"에서 "기계가 파싱하나"로 — API 우선으로</td></tr>
-        <tr><td data-l="실행 문장">Product-Market Fit 다음은 Product-Agent Fit</td><td data-l="문제점">PMF를 사람 기준으로만 보면 곧 한계가 와요</td><td data-l="제안">fit의 질문이 "에이전트가 쓸 수 있나"로 넓어져요</td></tr>
+    <details class="map-block pmf" open><summary class="mb-head">· Product-Agent Fit <span class="count">5개 주제</span></summary>
+      <table><thead><tr><th>콘텐츠 주제</th><th>고객의 고민</th><th>전달 메시지</th></tr></thead><tbody>
+        <tr><td data-l="콘텐츠 주제">당신의 다음 사용자는 사람이 아니다</td><td data-l="고객의 고민">제품을 사람 기준으로만 설계하고 있죠</td><td data-l="전달 메시지">고객이 일을 에이전트한테 넘기면 다음 사용자는 기계 — 지금 대비하세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">사람용 온보딩은 에이전트한텐 fit 0이다</td><td data-l="고객의 고민">사람한테 친절한 온보딩·UI가 에이전트한텐 의미가 없어요</td><td data-l="전달 메시지">에이전트가 쓸 수 있게 API·구조 적합성을 따로 보세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">에이전트 트래픽을 사람과 따로 측정해야 하는 이유</td><td data-l="고객의 고민">에이전트 사용이 사람 데이터에 섞이면 아무것도 안 보여요</td><td data-l="전달 메시지">분리 측정해야 기계가 들어오는 새 전환 경로를 포착해요</td></tr>
+        <tr><td data-l="콘텐츠 주제">다음 UX는 사람이 아니라 기계를 위한 것</td><td data-l="고객의 고민">UX를 사람 눈에만 맞춰왔죠</td><td data-l="전달 메시지">가독성 기준이 "사람이 보기 편한가"에서 "기계가 파싱하나"로 — API 우선으로</td></tr>
+        <tr><td data-l="콘텐츠 주제">Product-Market Fit 다음은 Product-Agent Fit</td><td data-l="고객의 고민">PMF를 사람 기준으로만 보면 곧 한계가 와요</td><td data-l="전달 메시지">fit의 질문이 "에이전트가 쓸 수 있나"로 넓어져요</td></tr>
       </tbody></table>
-    </div>
+    </details>
 
     <!-- LMF -->
-    <div class="cat-head"><span class="dot lmf"></span> LMF <span class="sub">Language-Market Fit</span></div>
+    <div class="cat-divider"><span class="cd-dot" style="background:var(--lmf)"></span> LMF <span class="cd-meta">4개 소주제 · 20개 주제</span></div>
 
-    <div class="map-block"><div class="mb-head">· 언어–고객 미스매치</div>
-      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
-        <tr><td data-l="실행 문장">'고객이 안 남는다'의 절반은 제품이 아니라 언어 문제다</td><td data-l="문제점">리텐션 안 나오면 다들 제품부터 의심하죠</td><td data-l="제안">틀린 한 줄이 틀린 고객을 데려오면 안 남아요 — 어떤 말이 누굴 데려왔는지 보세요</td></tr>
-        <tr><td data-l="실행 문장">틀린 메시지가 틀린 고객을 데려온다</td><td data-l="문제점">유입은 되는데 금방 빠져나가는 고객이 많죠</td><td data-l="제안">안 오는 게 아니라 엉뚱한 사람이 와서 이탈하는 거예요 — 리텐션 문제로 위장돼요</td></tr>
-        <tr><td data-l="실행 문장">같은 제품, 다른 한 줄, 다른 고객</td><td data-l="문제점">같은 제품인데 채널마다 고객 질이 다르죠</td><td data-l="제안">카피 한 줄이 누굴 데려올지 정해요 — 어느 언어가 남는 고객을 부르는지 측정하세요</td></tr>
-        <tr><td data-l="실행 문장">당신의 카피는 지금 어떤 고객을 거르고 있나</td><td data-l="문제점">카피가 누굴 끌고 누굴 거르는지 모르죠</td><td data-l="제안">카피는 동시에 누군가를 걸러내요 — 의도한 고객을 부르는지 점검하세요</td></tr>
-        <tr><td data-l="실행 문장">리텐션 문제로 위장한 메시지 문제 구별법</td><td data-l="문제점">결과는 같아도 원인이 제품일 수도 메시지일 수도 있어요</td><td data-l="제안">메시지별 코호트로 갈라보면 어느 쪽인지 드러나요</td></tr>
+    <details class="map-block lmf" open><summary class="mb-head">· 언어–고객 미스매치 <span class="count">5개 주제</span></summary>
+      <table><thead><tr><th>콘텐츠 주제</th><th>고객의 고민</th><th>전달 메시지</th></tr></thead><tbody>
+        <tr><td data-l="콘텐츠 주제">'고객이 안 남는다'의 절반은 제품이 아니라 언어 문제다</td><td data-l="고객의 고민">리텐션 안 나오면 다들 제품부터 의심하죠</td><td data-l="전달 메시지">틀린 한 줄이 틀린 고객을 데려오면 안 남아요 — 어떤 말이 누굴 데려왔는지 보세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">틀린 메시지가 틀린 고객을 데려온다</td><td data-l="고객의 고민">유입은 되는데 금방 빠져나가는 고객이 많죠</td><td data-l="전달 메시지">안 오는 게 아니라 엉뚱한 사람이 와서 이탈하는 거예요 — 리텐션 문제로 위장돼요</td></tr>
+        <tr><td data-l="콘텐츠 주제">같은 제품, 다른 한 줄, 다른 고객</td><td data-l="고객의 고민">같은 제품인데 채널마다 고객 질이 다르죠</td><td data-l="전달 메시지">카피 한 줄이 누굴 데려올지 정해요 — 어느 언어가 남는 고객을 부르는지 측정하세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">당신의 카피는 지금 어떤 고객을 거르고 있나</td><td data-l="고객의 고민">카피가 누굴 끌고 누굴 거르는지 모르죠</td><td data-l="전달 메시지">카피는 동시에 누군가를 걸러내요 — 의도한 고객을 부르는지 점검하세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">리텐션 문제로 위장한 메시지 문제 구별법</td><td data-l="고객의 고민">결과는 같아도 원인이 제품일 수도 메시지일 수도 있어요</td><td data-l="전달 메시지">메시지별 코호트로 갈라보면 어느 쪽인지 드러나요</td></tr>
       </tbody></table>
-    </div>
+    </details>
 
-    <div class="map-block"><div class="mb-head">· 언어의 맹점</div>
-      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
-        <tr><td data-l="실행 문장">'다들 알아듣겠지'가 가장 위험한 착각이다</td><td data-l="문제점">우리한텐 당연한 표현이 고객한텐 안 통하는 경우가 많아요</td><td data-l="제안">내부 합의를 시장 합의로 착각하면 안 돼요</td></tr>
-        <tr><td data-l="실행 문장">언어는 회의실에서 정하는 게 아니다</td><td data-l="문제점">메시지를 내부 토론으로만 정하고 있죠</td><td data-l="제안">통하는지는 시장이 행동으로 답해요 — 결정을 데이터한테 넘기세요</td></tr>
-        <tr><td data-l="실행 문장">제품에 가까울수록 메시지가 안 보이는 이유</td><td data-l="문제점">제품을 잘 알수록 객관적으로 말하기가 어려워져요</td><td data-l="제안">근접 편향을 인정하고 외부 반응 데이터로 보정하세요</td></tr>
-        <tr><td data-l="실행 문장">시장이 행동으로 답하게 만드는 법</td><td data-l="문제점">메시지가 통하는지 감으로 판단하면 자주 틀려요</td><td data-l="제안">메시지별 전환·리텐션으로 진짜 답을 받으세요</td></tr>
-        <tr><td data-l="실행 문장">우리 메시지를 우리가 평가하면 안 되는 이유</td><td data-l="문제점">자평으로 정하면 자주 틀려요, 이미 답을 알고 보거든요</td><td data-l="제안">평가는 시장 행동 데이터한테 맡기세요</td></tr>
+    <details class="map-block lmf" open><summary class="mb-head">· 언어의 맹점 <span class="count">5개 주제</span></summary>
+      <table><thead><tr><th>콘텐츠 주제</th><th>고객의 고민</th><th>전달 메시지</th></tr></thead><tbody>
+        <tr><td data-l="콘텐츠 주제">'다들 알아듣겠지'가 가장 위험한 착각이다</td><td data-l="고객의 고민">우리한텐 당연한 표현이 고객한텐 안 통하는 경우가 많아요</td><td data-l="전달 메시지">내부 합의를 시장 합의로 착각하면 안 돼요</td></tr>
+        <tr><td data-l="콘텐츠 주제">언어는 회의실에서 정하는 게 아니다</td><td data-l="고객의 고민">메시지를 내부 토론으로만 정하고 있죠</td><td data-l="전달 메시지">통하는지는 시장이 행동으로 답해요 — 결정을 데이터한테 넘기세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">제품에 가까울수록 메시지가 안 보이는 이유</td><td data-l="고객의 고민">제품을 잘 알수록 객관적으로 말하기가 어려워져요</td><td data-l="전달 메시지">근접 편향을 인정하고 외부 반응 데이터로 보정하세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">시장이 행동으로 답하게 만드는 법</td><td data-l="고객의 고민">메시지가 통하는지 감으로 판단하면 자주 틀려요</td><td data-l="전달 메시지">메시지별 전환·리텐션으로 진짜 답을 받으세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">우리 메시지를 우리가 평가하면 안 되는 이유</td><td data-l="고객의 고민">자평으로 정하면 자주 틀려요, 이미 답을 알고 보거든요</td><td data-l="전달 메시지">평가는 시장 행동 데이터한테 맡기세요</td></tr>
       </tbody></table>
-    </div>
+    </details>
 
-    <div class="map-block"><div class="mb-head">· 메시지 반감기</div>
-      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
-        <tr><td data-l="실행 문장">통하는 말은 곧 모두의 말이 된다</td><td data-l="문제점">잘 먹히는 메시지일수록 경쟁사가 빨리 베껴요</td><td data-l="제안">한때 차별점이던 말이 곧 모두의 말이 돼 닳아요 — 닳는다 보고 갱신하세요</td></tr>
-        <tr><td data-l="실행 문장">한때 먹히던 카피가 언제 죽었는지 아는 법</td><td data-l="문제점">효과 떨어진 줄 모르고 계속 쓰는 카피 많죠</td><td data-l="제안">메시지별 성과 추이를 봐야 언제 죽었는지 알아요</td></tr>
-        <tr><td data-l="실행 문장">메시지에도 리뉴얼 주기가 있다</td><td data-l="문제점">한번 정한 메시지를 몇 년씩 우려먹곤 하죠</td><td data-l="제안">메시지에도 반감기가 있어요 — 제품 리뉴얼하듯 주기를 잡으세요</td></tr>
-        <tr><td data-l="실행 문장">차별화가 마모되는 속도를 추적하라</td><td data-l="문제점">차별화는 갑자기가 아니라 서서히 닳아요</td><td data-l="제안">사후에 알아채지 말고 성과 추이로 마모 속도를 미리 추적하세요</td></tr>
-        <tr><td data-l="실행 문장">작년에 통한 메시지가 올해 안 통하는 이유</td><td data-l="문제점">작년에 먹힌 메시지를 그대로 쓰는데 반응이 시들하죠</td><td data-l="제안">시장도 경쟁도 바뀌었어요 — 과거 성공 메시지일수록 다시 검증하세요</td></tr>
+    <details class="map-block lmf" open><summary class="mb-head">· 메시지 반감기 <span class="count">5개 주제</span></summary>
+      <table><thead><tr><th>콘텐츠 주제</th><th>고객의 고민</th><th>전달 메시지</th></tr></thead><tbody>
+        <tr><td data-l="콘텐츠 주제">통하는 말은 곧 모두의 말이 된다</td><td data-l="고객의 고민">잘 먹히는 메시지일수록 경쟁사가 빨리 베껴요</td><td data-l="전달 메시지">한때 차별점이던 말이 곧 모두의 말이 돼 닳아요 — 닳는다 보고 갱신하세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">한때 먹히던 카피가 언제 죽었는지 아는 법</td><td data-l="고객의 고민">효과 떨어진 줄 모르고 계속 쓰는 카피 많죠</td><td data-l="전달 메시지">메시지별 성과 추이를 봐야 언제 죽었는지 알아요</td></tr>
+        <tr><td data-l="콘텐츠 주제">메시지에도 리뉴얼 주기가 있다</td><td data-l="고객의 고민">한번 정한 메시지를 몇 년씩 우려먹곤 하죠</td><td data-l="전달 메시지">메시지에도 반감기가 있어요 — 제품 리뉴얼하듯 주기를 잡으세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">차별화가 마모되는 속도를 추적하라</td><td data-l="고객의 고민">차별화는 갑자기가 아니라 서서히 닳아요</td><td data-l="전달 메시지">사후에 알아채지 말고 성과 추이로 마모 속도를 미리 추적하세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">작년에 통한 메시지가 올해 안 통하는 이유</td><td data-l="고객의 고민">작년에 먹힌 메시지를 그대로 쓰는데 반응이 시들하죠</td><td data-l="전달 메시지">시장도 경쟁도 바뀌었어요 — 과거 성공 메시지일수록 다시 검증하세요</td></tr>
       </tbody></table>
-    </div>
+    </details>
 
-    <div class="map-block"><div class="mb-head">· 카피 동질화</div>
-      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
-        <tr><td data-l="실행 문장">같은 LLM으로 쓰면 다 같은 말이 된다</td><td data-l="문제점">다들 같은 모델로 쓰니까 표현이 점점 비슷해져요</td><td data-l="제안">문구로는 차별화가 안 돼요 — 그 안에 담긴 증거로 가세요</td></tr>
-        <tr><td data-l="실행 문장">세련된 문구로는 더 이상 못 이긴다</td><td data-l="문제점">카피 퀄리티가 다 같이 상향 평준화됐어요</td><td data-l="제안">무게중심을 "얼마나 멋지게 썼나"에서 "무슨 증거가 있나"로 옮기세요</td></tr>
-        <tr><td data-l="실행 문장">카피의 차별화는 표현이 아니라 증거다</td><td data-l="문제점">멋진 문구에 투자해도 신뢰·전환이 안 늘죠</td><td data-l="제안">검증된 숫자·결과를 카피에 박으세요</td></tr>
-        <tr><td data-l="실행 문장">모두가 카피를 잘 쓰게 된 시대의 차별화</td><td data-l="문제점">누구나 좋은 카피를 뽑으니 글솜씨는 강점이 아니에요</td><td data-l="제안">베낄 수 없는 고유 데이터·결과를 근거로 쓰는 것만 남아요</td></tr>
-        <tr><td data-l="실행 문장">AI 시대 카피라이팅의 무게중심 이동</td><td data-l="문제점">카피 전략이 아직 "문구 다듬기"에 머물러 있다면 곧 밀려요</td><td data-l="제안">무게중심이 표현 경쟁에서 증거 경쟁으로 넘어갔어요 — 거기 맞추세요</td></tr>
+    <details class="map-block lmf" open><summary class="mb-head">· 카피 동질화 <span class="count">5개 주제</span></summary>
+      <table><thead><tr><th>콘텐츠 주제</th><th>고객의 고민</th><th>전달 메시지</th></tr></thead><tbody>
+        <tr><td data-l="콘텐츠 주제">같은 LLM으로 쓰면 다 같은 말이 된다</td><td data-l="고객의 고민">다들 같은 모델로 쓰니까 표현이 점점 비슷해져요</td><td data-l="전달 메시지">문구로는 차별화가 안 돼요 — 그 안에 담긴 증거로 가세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">세련된 문구로는 더 이상 못 이긴다</td><td data-l="고객의 고민">카피 퀄리티가 다 같이 상향 평준화됐어요</td><td data-l="전달 메시지">무게중심을 "얼마나 멋지게 썼나"에서 "무슨 증거가 있나"로 옮기세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">카피의 차별화는 표현이 아니라 증거다</td><td data-l="고객의 고민">멋진 문구에 투자해도 신뢰·전환이 안 늘죠</td><td data-l="전달 메시지">검증된 숫자·결과를 카피에 박으세요</td></tr>
+        <tr><td data-l="콘텐츠 주제">모두가 카피를 잘 쓰게 된 시대의 차별화</td><td data-l="고객의 고민">누구나 좋은 카피를 뽑으니 글솜씨는 강점이 아니에요</td><td data-l="전달 메시지">베낄 수 없는 고유 데이터·결과를 근거로 쓰는 것만 남아요</td></tr>
+        <tr><td data-l="콘텐츠 주제">AI 시대 카피라이팅의 무게중심 이동</td><td data-l="고객의 고민">카피 전략이 아직 "문구 다듬기"에 머물러 있다면 곧 밀려요</td><td data-l="전달 메시지">무게중심이 표현 경쟁에서 증거 경쟁으로 넘어갔어요 — 거기 맞추세요</td></tr>
       </tbody></table>
-    </div>
+    </details>
   </section>
 
   <!-- 현재 위치 -->
   <section id="next">
-    <div class="sec-head"><div class="sec-num" style="background:linear-gradient(135deg,#3fb950,#2a9442)">✓</div><h2>현재 위치 &amp; 다음 작업</h2></div>
-    <div class="card">
-      <h3 style="color:var(--ok)">확정</h3>
-      <p>기초철학 · 브랜드 퍼소나 · 전략 Thesis/원칙 · 12개 컨셉 · 콘텐츠 맵(대 3 / 소 12 / 실행 60, 톤 통일·표 양식)</p>
-      <h3 style="margin-top:14px;color:var(--dim)">제외</h3>
-      <p>고객 분석 기둥</p>
+    <div class="sec-head"><div class="sec-num" style="background:linear-gradient(135deg,#3fb950,#2a9442)">✓</div><h2>프레임워크 완성도</h2><span class="tag">7단계 중 3단계 확정</span></div>
+
+    <div class="progress-wrap">
+      <div class="progress-top">
+        <div><span class="pct">43%</span> <span class="lbl">코어 + 전략 레이어 확정</span></div>
+        <div class="lbl">3 / 7 단계</div>
+      </div>
+      <div class="bar"><i style="width:43%"></i></div>
+      <div class="phase-grid">
+        <div class="phase done"><span class="ph-no">1</span><span class="ph-name">기초철학</span></div>
+        <div class="phase done"><span class="ph-no">2</span><span class="ph-name">브랜드 퍼소나</span></div>
+        <div class="phase done"><span class="ph-no">3</span><span class="ph-name">전략 컨셉 &amp; 맵</span></div>
+        <div class="phase pending"><span class="ph-no">4</span><span class="ph-name">Key Message</span></div>
+        <div class="phase pending"><span class="ph-no">5</span><span class="ph-name">실행 컨셉</span></div>
+        <div class="phase pending"><span class="ph-no">6</span><span class="ph-name">컨셉 세부설명</span></div>
+        <div class="phase pending"><span class="ph-no">7</span><span class="ph-name">세부 액션</span></div>
+      </div>
     </div>
-    <h3 style="margin:24px 0 8px;font-size:15px;color:var(--dim)">다음 순서 (미작성 4단계)</h3>
+
+    <div class="grid cols-2" style="margin-top:16px">
+      <div class="card">
+        <h3><span class="status-chip done">확정</span></h3>
+        <p>기초철학 · 브랜드 퍼소나 · 전략 Thesis/원칙 · 12개 컨셉 · 콘텐츠 맵(소 12 / 주제 60, 톤 통일·표 양식)</p>
+      </div>
+      <div class="card">
+        <h3><span class="status-chip todo">작성 예정</span></h3>
+        <p>Key Message · 실행 컨셉 · 컨셉 세부설명 · 세부 액션 아이템 (4~7단계) — 12개 컨셉을 기준으로 순차 설계.</p>
+      </div>
+    </div>
+
+    <h3 style="margin:24px 0 8px;font-size:15px;color:var(--dim)">다음 작업 순서</h3>
     <div class="timeline">
       <div class="tl next"><div class="mk">4</div><div class="body"><b>Key Message</b><span>후보: "AI 시대에 맞게 성장하세요" / "AI에게 일을 시키려면 본질부터 챙기세요" — 우선순위 컨셉 확정 후 결정</span></div></div>
-      <div class="tl next"><div class="mk">5</div><div class="body"><b>실행 컨셉</b><span>AI 그로스 플레이북 / 데이터 분석 토크 — 위 12개 컨셉 기준으로 재설계 필요</span></div></div>
+      <div class="tl next"><div class="mk">5</div><div class="body"><b>실행 컨셉</b><span>AI 그로스 플레이북 / 데이터 분석 토크 — 위 12개 컨셉 기준으로 재설계</span></div></div>
       <div class="tl next"><div class="mk">6</div><div class="body"><b>컨셉 세부설명</b></div></div>
       <div class="tl next"><div class="mk">7</div><div class="body"><b>세부 액션 아이템</b></div></div>
     </div>
@@ -509,6 +586,17 @@
 </div>
 
 <script>
+  // content-map expand/collapse all
+  const mapToggle = document.getElementById('mapToggle');
+  if (mapToggle) {
+    mapToggle.addEventListener('click', () => {
+      const blocks = [...document.querySelectorAll('details.map-block')];
+      const anyOpen = blocks.some(d => d.open);
+      blocks.forEach(d => d.open = !anyOpen);
+      mapToggle.textContent = anyOpen ? '전체 펼치기' : '전체 접기';
+    });
+  }
+
   // active TOC highlight
   const links = [...document.querySelectorAll('.toc a')];
   const map = {}; links.forEach(a => map[a.getAttribute('href').slice(1)] = a);
