@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>마켓핏랩 솔루션즈 — 브랜드 & 콘텐츠 전략 프레임워크</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0e1117;
+    --surface: #161b22;
+    --surface-2: #1c232d;
+    --line: #2a3340;
+    --text: #e6edf3;
+    --muted: #9aa7b4;
+    --dim: #6b7785;
+    --accent: #4f8cff;
+    --crm: #ff7a59;
+    --pmf: #00c2a8;
+    --lmf: #b07cff;
+    --warn: #f5c451;
+    --ok: #3fb950;
+    --radius: 16px;
+    --maxw: 920px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: radial-gradient(1200px 600px at 50% -200px, #18222f 0%, var(--bg) 55%) fixed;
+    color: var(--text);
+    font-family: 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px 120px; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    text-align: center;
+    padding: 70px 20px 50px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 48px;
+  }
+  .hero .eyebrow {
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: .14em;
+    font-size: 13px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(26px, 5vw, 42px);
+    font-weight: 900;
+    margin: 14px 0 18px;
+    line-height: 1.25;
+    background: linear-gradient(120deg, #fff 20%, #9fc3ff 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .status-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    color: var(--muted);
+    padding: 8px 16px; border-radius: 999px; font-size: 13px;
+  }
+  .status-badge b { color: var(--ok); font-weight: 700; }
+
+  /* ---------- Section ---------- */
+  section { margin: 56px 0; scroll-margin-top: 24px; }
+  .sec-head { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+  .sec-num {
+    flex: none; width: 40px; height: 40px; border-radius: 12px;
+    display: grid; place-items: center; font-weight: 900; font-size: 18px;
+    background: linear-gradient(135deg, var(--accent), #2b6bd6); color: #fff;
+    box-shadow: 0 6px 20px rgba(79,140,255,.35);
+  }
+  .sec-head h2 { font-size: 24px; font-weight: 900; margin: 0; }
+  .sec-head .tag { font-size: 12px; color: var(--dim); font-weight: 500; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px 26px;
+    margin: 16px 0;
+  }
+  .card h3 { margin: 0 0 6px; font-size: 17px; font-weight: 700; }
+  .card p { margin: 6px 0; color: var(--muted); }
+  .card.lead { border-left: 4px solid var(--accent); }
+
+  .callout {
+    background: linear-gradient(135deg, rgba(79,140,255,.12), rgba(79,140,255,.04));
+    border: 1px solid rgba(79,140,255,.35);
+    border-radius: var(--radius);
+    padding: 22px 24px; margin: 18px 0;
+  }
+  .callout .lbl { color: var(--accent); font-weight: 800; font-size: 13px; letter-spacing: .05em; }
+  .callout p { margin: 8px 0 0; }
+  .callout strong { color: #fff; }
+
+  /* ---------- Layer stack ---------- */
+  .layers { display: flex; flex-direction: column; gap: 8px; }
+  .layer {
+    display: flex; align-items: center; gap: 14px;
+    border-radius: 12px; padding: 14px 18px;
+    border: 1px solid var(--line); background: var(--surface);
+    position: relative;
+  }
+  .layer .idx { font-weight: 900; color: var(--dim); width: 22px; }
+  .layer .name { font-weight: 700; }
+  .layer .pill {
+    margin-left: auto; font-size: 11px; font-weight: 700; padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .layer.core { background: linear-gradient(90deg, rgba(63,185,80,.14), var(--surface)); border-color: rgba(63,185,80,.4); }
+  .layer.core .pill { background: rgba(63,185,80,.18); color: var(--ok); }
+  .layer.var { background: linear-gradient(90deg, rgba(79,140,255,.12), var(--surface)); border-color: rgba(79,140,255,.35); }
+  .layer.var .pill { background: rgba(79,140,255,.18); color: var(--accent); }
+  .layer.todo { opacity: .6; border-style: dashed; }
+  .layer.todo .pill { background: var(--surface-2); color: var(--dim); }
+
+  .tone-bar {
+    margin-top: 18px; padding: 16px 20px; border-radius: 12px;
+    background: var(--surface-2); border: 1px dashed var(--line); font-size: 14px;
+  }
+  .tone-bar .x { color: #ff6b6b; font-weight: 700; }
+  .tone-bar .o { color: var(--ok); font-weight: 700; }
+
+  /* ---------- Grid cards ---------- */
+  .grid { display: grid; gap: 14px; }
+  .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .chip-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+  .chip {
+    background: var(--surface-2); border: 1px solid var(--line);
+    border-radius: 999px; padding: 8px 16px; font-size: 14px; font-weight: 500;
+  }
+
+  .mini { background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+  .mini .k { font-weight: 700; color: #fff; font-size: 14px; }
+  .mini .v { color: var(--muted); font-size: 14px; margin-top: 4px; }
+
+  /* ---------- Concept cards ---------- */
+  .cat-head {
+    display: flex; align-items: center; gap: 10px; margin: 34px 0 12px;
+    font-weight: 900; font-size: 18px;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.crm { background: var(--crm); } .dot.pmf { background: var(--pmf); } .dot.lmf { background: var(--lmf); }
+  .cat-head .sub { font-size: 12px; font-weight: 500; color: var(--dim); }
+
+  .concept {
+    display: flex; gap: 16px; padding: 20px 22px; border-radius: 14px;
+    background: var(--surface); border: 1px solid var(--line); margin: 12px 0;
+  }
+  .concept .no {
+    flex: none; width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center;
+    font-weight: 900; font-size: 16px; color: #0e1117;
+  }
+  .concept.crm .no { background: var(--crm); } .concept.pmf .no { background: var(--pmf); } .concept.lmf .no { background: var(--lmf); }
+  .concept h4 { margin: 0 0 6px; font-size: 16px; font-weight: 800; }
+  .concept p { margin: 0; color: var(--muted); font-size: 14.5px; }
+
+  /* ---------- Content map table ---------- */
+  .map-block { margin: 22px 0; }
+  .map-block .mb-head { display: flex; align-items: center; gap: 8px; font-weight: 800; margin-bottom: 10px; font-size: 15px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; border-radius: 12px; overflow: hidden; }
+  thead th {
+    background: var(--surface-2); color: var(--muted); text-align: left;
+    padding: 12px 14px; font-weight: 700; font-size: 12.5px; letter-spacing: .03em;
+    border-bottom: 1px solid var(--line);
+  }
+  tbody td { padding: 13px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tbody tr { background: var(--surface); }
+  tbody td:first-child { font-weight: 700; color: #fff; width: 28%; }
+  tbody td:nth-child(2) { color: var(--dim); width: 34%; }
+  tbody td:nth-child(3) { color: var(--muted); }
+
+  /* ---------- Status / next ---------- */
+  .timeline { display: flex; flex-direction: column; gap: 0; margin-top: 10px; }
+  .tl { display: flex; gap: 14px; align-items: flex-start; padding: 10px 0; }
+  .tl .mk { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; }
+  .tl.done .mk { background: rgba(63,185,80,.18); color: var(--ok); border: 1px solid rgba(63,185,80,.5); }
+  .tl.next .mk { background: var(--surface-2); color: var(--dim); border: 1px dashed var(--line); }
+  .tl .body b { display: block; }
+  .tl .body span { color: var(--muted); font-size: 13.5px; }
+
+  /* ---------- TOC nav ---------- */
+  .toc {
+    position: sticky; top: 0; z-index: 20; backdrop-filter: blur(10px);
+    background: rgba(14,17,23,.8); border-bottom: 1px solid var(--line);
+    padding: 12px 0; margin-bottom: 0;
+  }
+  .toc-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; display: flex; gap: 6px; flex-wrap: wrap; overflow-x: auto; }
+  .toc a {
+    color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500;
+    padding: 6px 12px; border-radius: 8px; white-space: nowrap;
+  }
+  .toc a:hover { background: var(--surface-2); color: #fff; }
+
+  footer { text-align: center; color: var(--dim); font-size: 13px; padding-top: 40px; border-top: 1px solid var(--line); margin-top: 60px; }
+
+  @media (max-width: 680px) {
+    .grid.cols-2, .grid.cols-3 { grid-template-columns: 1fr; }
+    tbody td:first-child, tbody td:nth-child(2) { width: auto; }
+    table, thead, tbody, th, td, tr { display: block; }
+    thead { display: none; }
+    tbody tr { margin-bottom: 14px; border: 1px solid var(--line); border-radius: 12px; padding: 6px; }
+    tbody td { border: none; padding: 8px 12px; }
+    tbody td::before { content: attr(data-l); display: block; font-size: 11px; color: var(--dim); font-weight: 700; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#use">사용법</a>
+    <a href="#principle">관통 원칙</a>
+    <a href="#phil">1. 기초철학</a>
+    <a href="#persona">2. 브랜드 퍼소나</a>
+    <a href="#concept">3. 전략 컨셉</a>
+    <a href="#map">콘텐츠 맵</a>
+    <a href="#next">현재 위치</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">MarketFitLab Solutions</div>
+  <h1>브랜드 &amp; 콘텐츠 전략 프레임워크</h1>
+  <div class="status-badge">현재 상태 · <b>콘텐츠 맵까지 확정</b> (톤 통일본) / Key Message 이하 미작성</div>
+</header>
+
+<div class="wrap">
+
+  <!-- 사용법 -->
+  <section id="use">
+    <div class="sec-head"><div class="sec-num">★</div><h2>이 프레임워크를 쓰는 법</h2><span class="tag">구조 원칙</span></div>
+    <p style="color:var(--muted)">7개 레이어를 위 → 아래로 세분화한다. 위 두 층은 <b style="color:var(--ok)">변하지 않는 코어</b>, 전략 컨셉부터는 마케팅/세일즈 전략에 따라 <b style="color:var(--accent)">바뀌는 가변층</b>.</p>
+    <div class="layers">
+      <div class="layer core"><span class="idx">1</span><span class="name">기초철학</span><span class="pill">불변 코어</span></div>
+      <div class="layer core"><span class="idx">2</span><span class="name">브랜드 퍼소나</span><span class="pill">불변 코어</span></div>
+      <div class="layer var"><span class="idx">3</span><span class="name">전략 컨셉 &amp; 키워드</span><span class="pill">가변</span></div>
+      <div class="layer var"><span class="idx">4</span><span class="name">Key Message</span><span class="pill">가변</span></div>
+      <div class="layer var"><span class="idx">5</span><span class="name">실행 컨셉 (전략과 얼라인)</span><span class="pill">가변</span></div>
+      <div class="layer var"><span class="idx">6</span><span class="name">컨셉 세부설명</span><span class="pill">가변</span></div>
+      <div class="layer var"><span class="idx">7</span><span class="name">세부 액션 아이템</span><span class="pill">가변</span></div>
+    </div>
+    <div class="tone-bar">
+      <b>톤앤매너 (모든 기획서 공통)</b> — 짧고 단정적 · 당연한 가정을 한 번 뒤집고 · 메커니즘 한 방 · 솔직한 단서.<br/>
+      <span class="x">❌ "AI 시대에도 필요"(방어)</span> &nbsp;→&nbsp; <span class="o">✅ "AI 시대에 더 필요"(적극)</span>
+    </div>
+  </section>
+
+  <!-- 관통 원칙 -->
+  <section id="principle">
+    <div class="sec-head"><div class="sec-num" style="background:linear-gradient(135deg,#f5c451,#e0a82e)">◎</div><h2>관통 원칙</h2><span class="tag">전략의 본질</span></div>
+    <div class="callout">
+      <div class="lbl">THESIS</div>
+      <p>AI·데이터·마케팅에서 올바르게 성장하는 가장 빠른 방법은 <strong>본질을 찾는 것</strong>.</p>
+    </div>
+    <div class="grid cols-2">
+      <div class="card"><h3>본질 = 방향이 아니라 기반</h3><p>똑같이 스케일하는데 누구는 복리로 쌓이고 누구는 돈을 태우는 차이는 — 검증된 데이터·인과·측정이라는 <b style="color:var(--text)">기반</b>에서 갈린다.</p></div>
+      <div class="card"><h3>"늘리지 마라" ❌ → "복리가 되게 늘려라" ✅</h3><p>늘려라, 단 그게 복리가 되게 기반을 잡아라.</p></div>
+      <div class="card"><h3>전략 각도: AI는 기본값, 차이는 검증</h3><p>모두가 AI를 쓰는 시점에 "AI 씁니다"는 차별점이 아니다. <b style="color:var(--text)">검증된 결과</b>가 차별점이다.</p></div>
+      <div class="card"><h3>모든 컨셉의 공통 골격</h3><p>"스케일이 복리가 되느냐, 돈을 태우느냐"를 가르는 <b style="color:var(--text)">숨은 변수</b>를 짚는다.</p></div>
+    </div>
+  </section>
+
+  <!-- 1. 기초철학 -->
+  <section id="phil">
+    <div class="sec-head"><div class="sec-num">1</div><h2>기초철학</h2><span class="tag">변하지 않음</span></div>
+    <div class="grid cols-2">
+      <div class="card lead"><h3>대외 히어로</h3><p>데이터를 기반으로 비즈니스의 성장을 설계합니다. 재현 가능한 비즈니스 성장 방법론을 찾아내고 개선합니다.</p></div>
+      <div class="card lead"><h3>내부 신조</h3><p>감이 아니라 숫자로, 주관이 아니라 객관으로 — 직접 해본 그로스 전문가 집단이 가르치듯 증명해 신뢰를 만든다.</p></div>
+    </div>
+    <div class="card">
+      <h3>기초철학 6요소 (불변 코어)</h3>
+      <div class="chip-grid">
+        <span class="chip">🎓 티처햇</span>
+        <span class="chip">🔢 숫자로 증명한다</span>
+        <span class="chip">⚖️ 객관적 입장을 취한다</span>
+        <span class="chip">👥 그로스 전문가 집단</span>
+        <span class="chip">🤝 고객에게 신뢰를 준다</span>
+        <span class="chip">🛠️ 직접 해본다</span>
+      </div>
+    </div>
+    <div class="tone-bar">📌 <b>운영 노트</b> — 티처햇·신뢰는 히어로 문구에 박지 않고, 그 아래 가치/소개 섹션에서 살린다.</div>
+  </section>
+
+  <!-- 2. 브랜드 퍼소나 -->
+  <section id="persona">
+    <div class="sec-head"><div class="sec-num">2</div><h2>브랜드 퍼소나</h2><span class="tag">변하지 않음</span></div>
+    <div class="callout">
+      <div class="lbl">북극성 요약</div>
+      <p><strong>검증된 방법론으로 고객의 성장을 만드는 그로스 파트너, MFL</strong></p>
+    </div>
+    <div class="card">
+      <h3>정체성</h3>
+      <p>현장에서 직접 굴려본 그로스 리드. 컨설팅 책상물림이 아니라 운영하며 숫자를 만들어본 사람. 마테크·AI를 누구보다 잘 다루지만 도구로만 본다. AI를 제일 잘 쓰면서 제일 안 믿고, "왜 됐는지" 설명 못 하는 성공은 성공으로 안 친다.</p>
+    </div>
+    <h3 style="margin:24px 0 4px;font-size:15px;color:var(--dim)">행동으로 본 성격</h3>
+    <div class="grid cols-2">
+      <div class="mini"><div class="k">과대광고 알레르기</div><div class="v">AI를 매일 쓰면서도 "AI로 매출 10배" 같은 말엔 가장 먼저 "근거는요?"</div></div>
+      <div class="mini"><div class="k">근거주의 직설</div><div class="v">데이터 없으면 입을 닫고, 있으면 돌려 말하지 않는다</div></div>
+      <div class="mini"><div class="k">보여주는 선생</div><div class="v">"이렇게 돌리면 됩니다" 하고 화면을 띄운다. 가르치되 잘난 척은 안 한다</div></div>
+      <div class="mini"><div class="k">결과로 쌓는 신뢰</div><div class="v">"믿어달라" 대신 지난 분기 숫자를 꺼낸다</div></div>
+    </div>
+    <div class="grid cols-3" style="margin-top:14px">
+      <div class="card"><h3 style="font-size:14px">🗣 보이스 &amp; 톤</h3><p style="font-size:13.5px">짧고 단정적, 결론부터 / 형용사 대신 숫자("좋아졌다"→"전환율 3.2%p 올랐다") / 전문용어는 쓰되 폼 잡으려고 안 쓴다 / 과장·미사여구 금지</p></div>
+      <div class="card"><h3 style="font-size:14px">🚫 안 하는 것</h3><p style="font-size:13.5px">검증 안 된 단언 / 트렌드 편승 카피 / 두루뭉술한 컨설팅 어법 / 고객 비위 맞추는 빈말</p></div>
+      <div class="card"><h3 style="font-size:14px">✅ 톤 테스트</h3><p style="font-size:13.5px">"이걸 그 그로스 리드가 숫자 없이 말할까?" → 통과 못 하면 다시.</p></div>
+    </div>
+  </section>
+
+  <!-- 3. 전략 컨셉 -->
+  <section id="concept">
+    <div class="sec-head"><div class="sec-num">3</div><h2>전략 컨셉 &amp; 키워드</h2><span class="tag">전략에 따라 바뀜</span></div>
+    <div class="grid cols-3">
+      <div class="mini"><div class="k">Thesis</div><div class="v">AI·데이터·마케팅에서 올바르게 성장하는 가장 빠른 방법은 본질을 찾는 것.</div></div>
+      <div class="mini"><div class="k">각도</div><div class="v">AI는 기본값, 차이는 검증.</div></div>
+      <div class="mini"><div class="k">관통 원칙</div><div class="v">모든 컨셉은 스케일이 복리가 되느냐 돈을 태우느냐를 가르는 숨은 변수다.</div></div>
+    </div>
+
+    <div class="cat-head"><span class="dot crm"></span> CRM <span class="sub">고객 관계 · 자동화 · 측정</span></div>
+    <div class="concept crm"><div class="no">1</div><div><h4>데이터 해자 — 모델이 아니라 결과 데이터가 자산</h4><p>AI가 모델을 평준화시키니까 유일한 해자는 당신만 가진 의사결정·결과 데이터다. 베낄 수 없는 건 도구가 아니라 쌓인 데이터.</p></div></div>
+    <div class="concept crm"><div class="no">2</div><div><h4>목표가 곧 전략 — 에이전트는 틀린 목표까지 빠르게 최적화한다</h4><p>유일한 레버는 '무슨 목표를 주느냐'. 살짝 틀린 목표는 기계 속도로 잔인하게 최적화돼 망한다(Goodhart). 목표·보상 설계가 전장.</p></div></div>
+    <div class="concept crm"><div class="no">3</div><div><h4>빠른 대리지표 vs 느린 진실</h4><p>리텐션·LTV는 몇 주 걸리는데 에이전트는 즉시 클릭·오픈으로 최적화. 방치하면 장기가치를 단기 대리지표로 팔아먹는다.</p></div></div>
+    <div class="concept crm"><div class="no">4</div><div><h4>메시지에서 서비스 표면으로 (전장 이동)</h4><p>CRM이 메시지 채널을 떠나 자사몰의 검색·진열·가격·실시간 추천으로 이동 중. 전장은 메시지가 아니라 자사몰 자체.</p></div></div>
+    <div class="concept crm"><div class="no">5</div><div><h4>고객 쪽에도 AI가 있다 (machine-to-machine CRM)</h4><p>고객도 받은 메시지를 AI가 요약·필터·구매 대리. CRM은 사람의 감정이 아니라 고객 에이전트가 읽는 판단 기준을 상대한다. 선점 가치 큼.</p></div></div>
+
+    <div class="cat-head"><span class="dot pmf"></span> PMF <span class="sub">Product–Market Fit</span></div>
+    <div class="concept pmf"><div class="no">6</div><div><h4>PMF는 이제 복제 가능하다 — 달성이 아니라 유지가 문제</h4><p>fit을 만든 기능을 몇 주 만에 베낀다. PMF는 유통기한 있는 상태. AI가 못 베끼는 것(데이터·유통·신뢰)으로 지키는 게 게임. MMP가 조기 경보.</p></div></div>
+    <div class="concept pmf"><div class="no">7</div><div><h4>측정 지연 &gt; 시장 변화 속도</h4><p>8주 코호트로 확인하는 동안 AI 시장은 2주마다 바뀐다. 후행 LTV만 보면 늘 늦고, 선행 행동 신호를 빨리 읽는 쪽이 이긴다.</p></div></div>
+    <div class="concept pmf"><div class="no">8</div><div><h4>다음 사용자는 사람이 아니라 에이전트다 (Product–Agent Fit)</h4><p>fit 기준이 "사람에게 맞나"에서 "에이전트가 쓸 수 있나"로 이동. 사람용 온보딩·UI·API는 에이전트한텐 fit 0.</p></div></div>
+
+    <div class="cat-head"><span class="dot lmf"></span> LMF <span class="sub">Language–Market Fit · 메시지 fit</span></div>
+    <p style="color:var(--muted);font-size:14px;margin-top:-2px">LMF는 PMF의 하위가 아니라 <b style="color:var(--text)">별개 실패 모드</b> — 제품은 맞는데 말이 안 닿아 시장이 못 알아보는 경우.</p>
+    <div class="concept lmf"><div class="no">9</div><div><h4>틀린 언어는 틀린 고객을 데려온다</h4><p>메시지가 안 맞으면 잘못된 고객이 와서 금방 이탈 → 리텐션·PMF 데이터가 망가지고 "제품 문제"로 오진된다. 실은 LMF 문제.</p></div></div>
+    <div class="concept lmf"><div class="no">10</div><div><h4>네 언어는 네가 객관적으로 못 본다</h4><p>제품에 너무 가까워 "다들 알아듣겠지"가 가장 위험한 가짜 신호. 회의실 합의는 시장 합의가 아니다 — 시장 행동으로 측정.</p></div></div>
+    <div class="concept lmf"><div class="no">11</div><div><h4>언어에도 반감기가 있다</h4><p>통하는 말은 경쟁사가 베껴 곧 모두의 말이 된다. LMF도 PMF처럼 유지 게임 — 언제 평준화됐는지 계속 추적.</p></div></div>
+    <div class="concept lmf"><div class="no">12</div><div><h4>AI가 카피를 동질화한다</h4><p>다 같은 LLM으로 쓰면 표현으론 차별화 안 됨. 무게중심이 '문구의 세련됨'에서 '말 속의 증거'(검증된 숫자·결과)로 이동.</p></div></div>
+
+    <div class="callout" style="margin-top:26px">
+      <div class="lbl">MMP WEAVE</div>
+      <p>PMF·LMF는 둘 다 "맞다(fit)"는 주장이고, fit은 <strong>측정</strong>으로만 증명된다. MMP(AppsFlyer)가 그 적합도 계측기 — 유입→설치→리텐션→LTV를 출처/크리에이티브별로 연결. AI가 측정을 깨뜨릴수록 MMP는 <strong>더</strong> 중요해진다.</p>
+    </div>
+  </section>
+
+  <!-- 콘텐츠 맵 -->
+  <section id="map">
+    <div class="sec-head"><div class="sec-num">＃</div><h2>키워드 &amp; 콘텐츠 맵</h2><span class="tag">대 3 / 소 12 / 실행 60</span></div>
+    <p style="color:var(--muted)">대카테고리(CRM/PMF/LMF) → 소카테고리(컨셉) → 실행 문장, 각 주제 아래 <b style="color:var(--text)">문제점·제안</b>. 톤 통일 적용.</p>
+
+    <!-- CRM -->
+    <div class="cat-head"><span class="dot crm"></span> CRM</div>
+
+    <div class="map-block"><div class="mb-head">· 데이터 해자</div>
+      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
+        <tr><td data-l="실행 문장">당신의 AI 스택은 경쟁사와 99% 똑같다</td><td data-l="문제점">다들 같은 모델·툴 쓰니까 "우리도 AI 써요"가 더는 자랑이 안 돼요</td><td data-l="제안">모델은 평준화됐고, 남는 차이는 당신이 굴리며 쌓은 결과 데이터 하나뿐이에요</td></tr>
+        <tr><td data-l="실행 문장">AI 시대에 유일하게 베낄 수 없는 것</td><td data-l="문제점">기능도 전략도 요즘은 몇 주면 따라잡혀요</td><td data-l="제안">안 베껴지는 건 당신이 결정하고 결과를 쌓아온 고유 데이터뿐 — 거기 투자해도 안 늦어요</td></tr>
+        <tr><td data-l="실행 문장">결과 데이터는 어떻게 해자가 되는가</td><td data-l="문제점">데이터를 쌓는다고 다 자산이 되진 않아요</td><td data-l="제안">"이렇게 결정했더니 이렇게 됐다" 루프가 남아야 다시 쓰이고, 그때부터 해자가 돼요</td></tr>
+        <tr><td data-l="실행 문장">도구는 평준화되고, 데이터는 복리로 쌓인다</td><td data-l="문제점">최신 툴에 돈 쓰는데 격차가 안 벌어지죠</td><td data-l="제안">툴은 남들도 사니까요 — 격차는 데이터를 얼마나 오래·제대로 쌓았느냐의 복리에서 나요</td></tr>
+        <tr><td data-l="실행 문장">우리 회사 데이터는 자산일까 그냥 로그일까</td><td data-l="문제점">데이터는 많은데 실제 결정엔 안 쓰이죠</td><td data-l="제안">재현 가능한 형태로 정리 안 돼 있으면 자산이 아니라 그냥 로그예요</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="map-block"><div class="mb-head">· 자율 최적화 통제</div>
+      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
+        <tr><td data-l="실행 문장">AI는 틀린 목표를 가장 빠르게 달성한다</td><td data-l="문제점">목표가 살짝 틀리면 에이전트가 그 틀린 걸 기계 속도로 밀어붙여요</td><td data-l="제안">자동화의 진짜 레버는 실행이 아니라 "무슨 목표를 주느냐"예요</td></tr>
+        <tr><td data-l="실행 문장">에이전트에게 마케팅을 맡기기 전 가장 먼저 정할 것</td><td data-l="문제점">다들 "어떻게 자동화할까"부터 고민하는데 순서가 틀렸어요</td><td data-l="제안">먼저 정할 건 목표·보상 함수 — 거기 안 잡히면 자동화할수록 빨리 틀려요</td></tr>
+        <tr><td data-l="실행 문장">지표가 목표가 되는 순간 망가진다 (Goodhart)</td><td data-l="문제점">KPI는 올랐는데 사업은 안 좋아진 적 있죠</td><td data-l="제안">대리지표를 목표로 박으면 그 숫자만 올리고 진짜 결과는 외면해요</td></tr>
+        <tr><td data-l="실행 문장">전술이 아니라 목표가 전장이다</td><td data-l="문제점">캠페인 디테일 만지는 데 시간 다 쓰는데 성과는 그대로죠</td><td data-l="제안">AI가 실행을 가져가면 쥐고 있어야 할 레버가 디테일이 아니라 목표로 옮겨가요</td></tr>
+        <tr><td data-l="실행 문장">자율 최적화를 폭주시키지 않는 가드레일</td><td data-l="문제점">자동 최적화를 켜두면 어디로 튈지 모르죠</td><td data-l="제안">목표·한계·측정 루프 세 개를 미리 걸어둬야 폭주를 막아요</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="map-block"><div class="mb-head">· 성과 착시</div>
+      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
+        <tr><td data-l="실행 문장">오픈율은 오르는데 매출은 왜 빠질까</td><td data-l="문제점">대시보드는 파랗게 좋아지는데 매출은 안 따라오죠</td><td data-l="제안">빠른 지표와 돈 되는 느린 지표를 연결해서 안 보면 계속 착시에 속아요</td></tr>
+        <tr><td data-l="실행 문장">AI 에이전트가 LTV를 클릭으로 바꿔치기한다</td><td data-l="문제점">에이전트는 즉시 보이는 클릭·전환부터 올려요</td><td data-l="제안">그 과정에서 LTV를 야금야금 깎아요 — 단기 숫자로 장기 가치를 바꿔치기</td></tr>
+        <tr><td data-l="실행 문장">당신이 최적화하는 그 지표가 사실 대리지표인 이유</td><td data-l="문제점">열심히 올리는 그 지표, 진짜 성과랑 연결돼 있나요</td><td data-l="제안">대부분 측정하기 쉬워 고른 대리지표예요 — 목적과 대리부터 구분하세요</td></tr>
+        <tr><td data-l="실행 문장">성과가 좋아 보일 때가 가장 위험하다</td><td data-l="문제점">좋아 보이는 게 선행 대리지표뿐이면 진짜 문제는 후행으로 늦게 터져요</td><td data-l="제안">좋아 보일 때일수록 후행 진실로 한 번 검증하세요</td></tr>
+        <tr><td data-l="실행 문장">선행지표와 후행지표, 무엇으로 결정하는가</td><td data-l="문제점">빠른 지표로 정하면 틀리고, 느린 지표 기다리면 늦죠</td><td data-l="제안">답은 둘 중 하나가 아니라 연결 — 선행으로 움직이고 후행으로 보정하세요</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="map-block"><div class="mb-head">· 서비스 표면 개인화</div>
+      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
+        <tr><td data-l="실행 문장">CRM의 다음은 검색창과 가격표다</td><td data-l="문제점">CRM 하면 다들 메일·푸시부터 떠올리죠</td><td data-l="제안">고객이 실제 결정하는 자리는 검색·진열·가격 — 개인화의 다음 전장은 거기예요</td></tr>
+        <tr><td data-l="실행 문장">마케터의 전장은 더 이상 메일함이 아니다</td><td data-l="문제점">채널 메시지만 최적화하는데 전환이 안 늘죠</td><td data-l="제안">고객은 사이트 안에서 사고팝니다 — 전장이 옮겨갔어요</td></tr>
+        <tr><td data-l="실행 문장">검색·진열·가격, 개인화의 새 전선</td><td data-l="문제점">어디부터 개인화해야 효과가 큰지 모르겠다면</td><td data-l="제안">결정이 실제 일어나는 구매 직전 표면부터 — 메시지보다 전환에 직접 닿아요</td></tr>
+        <tr><td data-l="실행 문장">메시지만 보는 CRM이 놓치는 절반</td><td data-l="문제점">CRM을 "발송 도구"로만 쓰면 전장의 절반만 봐요</td><td data-l="제안">고객이 둘러보고 결정하는 서비스 표면을 측정·개인화 범위에 넣으세요</td></tr>
+        <tr><td data-l="실행 문장">마지막 클릭이 아니라 진열대에서 이긴다</td><td data-l="문제점">막판 리타게팅에만 예산 쏟는데 효율은 떨어지죠</td><td data-l="제안">승부는 진열대 앞에서 마음 정하는 순간에 갈려요 — 거기를 개인화하세요</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="map-block"><div class="mb-head">· 기계가 읽는 마케팅</div>
+      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
+        <tr><td data-l="실행 문장">당신의 메시지를 고객의 AI가 먼저 읽는다</td><td data-l="문제점">공들인 카피가 고객한테 그대로 안 닿아요</td><td data-l="제안">고객의 AI가 먼저 요약·필터하니까, 기계가 파싱할 신호를 설계해야 해요</td></tr>
+        <tr><td data-l="실행 문장">카피 톤보다 파싱 가능한 신호가 중요해진다</td><td data-l="문제점">감성 카피에 힘 주는데 전환이 안 따라오죠</td><td data-l="제안">기계가 끼면 분위기보다 가격·조건 같은 구조화된 신호가 먼저 읽혀요</td></tr>
+        <tr><td data-l="실행 문장">고객이 구매 판단을 에이전트에게 맡기기 시작했다</td><td data-l="문제점">사람을 설득하던 방식이 점점 안 먹혀요</td><td data-l="제안">설득 상대가 사람의 감정이 아니라 에이전트의 판단 기준으로 바뀌었어요</td></tr>
+        <tr><td data-l="실행 문장">machine-to-machine CRM, 무엇이 달라지나</td><td data-l="문제점">보내는 쪽도 받는 쪽도 기계가 되면 CRM이 완전히 달라져요</td><td data-l="제안">아직 송신자 관점에서 말하는 데가 없어요 — 지금 선점하면 카테고리를 먼저 가져가요</td></tr>
+        <tr><td data-l="실행 문장">사람의 감정이 아니라 기계의 판단 기준을 설계하라</td><td data-l="문제점">감정에 호소하던 카피가 에이전트한텐 그냥 노이즈예요</td><td data-l="제안">에이전트가 비교·선택하는 기준에 맞춰 정보를 구조화하세요</td></tr>
+      </tbody></table>
+    </div>
+
+    <!-- PMF -->
+    <div class="cat-head"><span class="dot pmf"></span> PMF</div>
+
+    <div class="map-block"><div class="mb-head">· PMF 유지 게임</div>
+      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
+        <tr><td data-l="실행 문장">당신의 PMF에는 유통기한이 있다</td><td data-l="문제점">PMF 찍었다고 안심하는 순간이 제일 위험해요</td><td data-l="제안">AI가 fit 만든 기능을 몇 주면 베껴요 — 계속 닳는다 보고 운영하세요</td></tr>
+        <tr><td data-l="실행 문장">PMF는 찍는 게 아니라 지키는 것이다</td><td data-l="문제점">한 번 맞춘 fit이 자꾸 흔들리는 이유를 못 찾겠다면</td><td data-l="제안">전제가 틀린 거예요 — PMF는 유지 게임, 측정·자원을 거기 두세요</td></tr>
+        <tr><td data-l="실행 문장">AI가 못 베끼는 것으로 fit을 방어하는 법</td><td data-l="문제점">기능으로 만든 fit은 곧 따라잡혀요</td><td data-l="제안">데이터·유통·신뢰처럼 복제 안 되는 자산으로 무게중심을 옮겨야 지켜요</td></tr>
+        <tr><td data-l="실행 문장">복제당한 PMF는 어디서 먼저 드러나는가</td><td data-l="문제점">경쟁 세진 걸 보통 너무 늦게 알아채죠</td><td data-l="제안">가장 먼저 드러나는 건 신규 코호트 리텐션 하락 — 거기를 모니터링하세요</td></tr>
+        <tr><td data-l="실행 문장">기능은 2주면 베껴진다, 그다음은 무엇으로 버티나</td><td data-l="문제점">기능 경쟁만으론 격차가 안 유지돼요</td><td data-l="제안">그다음을 버티게 하는 건 데이터·관계처럼 시간으로만 쌓이는 것들이에요</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="map-block"><div class="mb-head">· 측정 시차</div>
+      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
+        <tr><td data-l="실행 문장">fit 데이터가 확정될 때 시장은 이미 바뀐다</td><td data-l="문제점">8주 코호트 검증하는 동안 AI 시장은 2주마다 바뀌어요</td><td data-l="제안">후행 검증만 믿으면 늘 한 박자 늦어요 — 선행 신호로 빨리 읽으세요</td></tr>
+        <tr><td data-l="실행 문장">LTV만 보면 늘 한 발 늦는 이유</td><td data-l="문제점">LTV는 정확하지만 느려서 결정이 사후약방문이 돼요</td><td data-l="제안">LTV를 미리 예측하게 해주는 선행 행동지표를 같이 보세요</td></tr>
+        <tr><td data-l="실행 문장">8주 코호트 vs 2주 시장, 측정이 못 따라간다</td><td data-l="문제점">측정 주기가 시장 변화 속도를 못 따라가는 게 진짜 문제예요</td><td data-l="제안">인정하고 선행지표 기반으로 빠르게 움직이세요</td></tr>
+        <tr><td data-l="실행 문장">후행지표의 함정에서 빠져나오기</td><td data-l="문제점">결과지표만 보면 늘 사건 끝난 뒤에 알게 돼요</td><td data-l="제안">선행으로 먼저 움직이고 후행으로 나중에 보정하는 구조로 가세요</td></tr>
+        <tr><td data-l="실행 문장">행동 신호를 먼저 읽는 쪽이 이긴다</td><td data-l="문제점">경쟁사보다 반응이 늘 한 박자 느리다면</td><td data-l="제안">초기 행동 신호를 측정 1순위로 올리면 결과 확정 전에 먼저 움직여요</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="map-block"><div class="mb-head">· Product-Agent Fit</div>
+      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
+        <tr><td data-l="실행 문장">당신의 다음 사용자는 사람이 아니다</td><td data-l="문제점">제품을 사람 기준으로만 설계하고 있죠</td><td data-l="제안">고객이 일을 에이전트한테 넘기면 다음 사용자는 기계 — 지금 대비하세요</td></tr>
+        <tr><td data-l="실행 문장">사람용 온보딩은 에이전트한텐 fit 0이다</td><td data-l="문제점">사람한테 친절한 온보딩·UI가 에이전트한텐 의미가 없어요</td><td data-l="제안">에이전트가 쓸 수 있게 API·구조 적합성을 따로 보세요</td></tr>
+        <tr><td data-l="실행 문장">에이전트 트래픽을 사람과 따로 측정해야 하는 이유</td><td data-l="문제점">에이전트 사용이 사람 데이터에 섞이면 아무것도 안 보여요</td><td data-l="제안">분리 측정해야 기계가 들어오는 새 전환 경로를 포착해요</td></tr>
+        <tr><td data-l="실행 문장">다음 UX는 사람이 아니라 기계를 위한 것</td><td data-l="문제점">UX를 사람 눈에만 맞춰왔죠</td><td data-l="제안">가독성 기준이 "사람이 보기 편한가"에서 "기계가 파싱하나"로 — API 우선으로</td></tr>
+        <tr><td data-l="실행 문장">Product-Market Fit 다음은 Product-Agent Fit</td><td data-l="문제점">PMF를 사람 기준으로만 보면 곧 한계가 와요</td><td data-l="제안">fit의 질문이 "에이전트가 쓸 수 있나"로 넓어져요</td></tr>
+      </tbody></table>
+    </div>
+
+    <!-- LMF -->
+    <div class="cat-head"><span class="dot lmf"></span> LMF <span class="sub">Language-Market Fit</span></div>
+
+    <div class="map-block"><div class="mb-head">· 언어–고객 미스매치</div>
+      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
+        <tr><td data-l="실행 문장">'고객이 안 남는다'의 절반은 제품이 아니라 언어 문제다</td><td data-l="문제점">리텐션 안 나오면 다들 제품부터 의심하죠</td><td data-l="제안">틀린 한 줄이 틀린 고객을 데려오면 안 남아요 — 어떤 말이 누굴 데려왔는지 보세요</td></tr>
+        <tr><td data-l="실행 문장">틀린 메시지가 틀린 고객을 데려온다</td><td data-l="문제점">유입은 되는데 금방 빠져나가는 고객이 많죠</td><td data-l="제안">안 오는 게 아니라 엉뚱한 사람이 와서 이탈하는 거예요 — 리텐션 문제로 위장돼요</td></tr>
+        <tr><td data-l="실행 문장">같은 제품, 다른 한 줄, 다른 고객</td><td data-l="문제점">같은 제품인데 채널마다 고객 질이 다르죠</td><td data-l="제안">카피 한 줄이 누굴 데려올지 정해요 — 어느 언어가 남는 고객을 부르는지 측정하세요</td></tr>
+        <tr><td data-l="실행 문장">당신의 카피는 지금 어떤 고객을 거르고 있나</td><td data-l="문제점">카피가 누굴 끌고 누굴 거르는지 모르죠</td><td data-l="제안">카피는 동시에 누군가를 걸러내요 — 의도한 고객을 부르는지 점검하세요</td></tr>
+        <tr><td data-l="실행 문장">리텐션 문제로 위장한 메시지 문제 구별법</td><td data-l="문제점">결과는 같아도 원인이 제품일 수도 메시지일 수도 있어요</td><td data-l="제안">메시지별 코호트로 갈라보면 어느 쪽인지 드러나요</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="map-block"><div class="mb-head">· 언어의 맹점</div>
+      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
+        <tr><td data-l="실행 문장">'다들 알아듣겠지'가 가장 위험한 착각이다</td><td data-l="문제점">우리한텐 당연한 표현이 고객한텐 안 통하는 경우가 많아요</td><td data-l="제안">내부 합의를 시장 합의로 착각하면 안 돼요</td></tr>
+        <tr><td data-l="실행 문장">언어는 회의실에서 정하는 게 아니다</td><td data-l="문제점">메시지를 내부 토론으로만 정하고 있죠</td><td data-l="제안">통하는지는 시장이 행동으로 답해요 — 결정을 데이터한테 넘기세요</td></tr>
+        <tr><td data-l="실행 문장">제품에 가까울수록 메시지가 안 보이는 이유</td><td data-l="문제점">제품을 잘 알수록 객관적으로 말하기가 어려워져요</td><td data-l="제안">근접 편향을 인정하고 외부 반응 데이터로 보정하세요</td></tr>
+        <tr><td data-l="실행 문장">시장이 행동으로 답하게 만드는 법</td><td data-l="문제점">메시지가 통하는지 감으로 판단하면 자주 틀려요</td><td data-l="제안">메시지별 전환·리텐션으로 진짜 답을 받으세요</td></tr>
+        <tr><td data-l="실행 문장">우리 메시지를 우리가 평가하면 안 되는 이유</td><td data-l="문제점">자평으로 정하면 자주 틀려요, 이미 답을 알고 보거든요</td><td data-l="제안">평가는 시장 행동 데이터한테 맡기세요</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="map-block"><div class="mb-head">· 메시지 반감기</div>
+      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
+        <tr><td data-l="실행 문장">통하는 말은 곧 모두의 말이 된다</td><td data-l="문제점">잘 먹히는 메시지일수록 경쟁사가 빨리 베껴요</td><td data-l="제안">한때 차별점이던 말이 곧 모두의 말이 돼 닳아요 — 닳는다 보고 갱신하세요</td></tr>
+        <tr><td data-l="실행 문장">한때 먹히던 카피가 언제 죽었는지 아는 법</td><td data-l="문제점">효과 떨어진 줄 모르고 계속 쓰는 카피 많죠</td><td data-l="제안">메시지별 성과 추이를 봐야 언제 죽었는지 알아요</td></tr>
+        <tr><td data-l="실행 문장">메시지에도 리뉴얼 주기가 있다</td><td data-l="문제점">한번 정한 메시지를 몇 년씩 우려먹곤 하죠</td><td data-l="제안">메시지에도 반감기가 있어요 — 제품 리뉴얼하듯 주기를 잡으세요</td></tr>
+        <tr><td data-l="실행 문장">차별화가 마모되는 속도를 추적하라</td><td data-l="문제점">차별화는 갑자기가 아니라 서서히 닳아요</td><td data-l="제안">사후에 알아채지 말고 성과 추이로 마모 속도를 미리 추적하세요</td></tr>
+        <tr><td data-l="실행 문장">작년에 통한 메시지가 올해 안 통하는 이유</td><td data-l="문제점">작년에 먹힌 메시지를 그대로 쓰는데 반응이 시들하죠</td><td data-l="제안">시장도 경쟁도 바뀌었어요 — 과거 성공 메시지일수록 다시 검증하세요</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="map-block"><div class="mb-head">· 카피 동질화</div>
+      <table><thead><tr><th>실행 문장</th><th>문제점</th><th>제안</th></tr></thead><tbody>
+        <tr><td data-l="실행 문장">같은 LLM으로 쓰면 다 같은 말이 된다</td><td data-l="문제점">다들 같은 모델로 쓰니까 표현이 점점 비슷해져요</td><td data-l="제안">문구로는 차별화가 안 돼요 — 그 안에 담긴 증거로 가세요</td></tr>
+        <tr><td data-l="실행 문장">세련된 문구로는 더 이상 못 이긴다</td><td data-l="문제점">카피 퀄리티가 다 같이 상향 평준화됐어요</td><td data-l="제안">무게중심을 "얼마나 멋지게 썼나"에서 "무슨 증거가 있나"로 옮기세요</td></tr>
+        <tr><td data-l="실행 문장">카피의 차별화는 표현이 아니라 증거다</td><td data-l="문제점">멋진 문구에 투자해도 신뢰·전환이 안 늘죠</td><td data-l="제안">검증된 숫자·결과를 카피에 박으세요</td></tr>
+        <tr><td data-l="실행 문장">모두가 카피를 잘 쓰게 된 시대의 차별화</td><td data-l="문제점">누구나 좋은 카피를 뽑으니 글솜씨는 강점이 아니에요</td><td data-l="제안">베낄 수 없는 고유 데이터·결과를 근거로 쓰는 것만 남아요</td></tr>
+        <tr><td data-l="실행 문장">AI 시대 카피라이팅의 무게중심 이동</td><td data-l="문제점">카피 전략이 아직 "문구 다듬기"에 머물러 있다면 곧 밀려요</td><td data-l="제안">무게중심이 표현 경쟁에서 증거 경쟁으로 넘어갔어요 — 거기 맞추세요</td></tr>
+      </tbody></table>
+    </div>
+  </section>
+
+  <!-- 현재 위치 -->
+  <section id="next">
+    <div class="sec-head"><div class="sec-num" style="background:linear-gradient(135deg,#3fb950,#2a9442)">✓</div><h2>현재 위치 &amp; 다음 작업</h2></div>
+    <div class="card">
+      <h3 style="color:var(--ok)">확정</h3>
+      <p>기초철학 · 브랜드 퍼소나 · 전략 Thesis/원칙 · 12개 컨셉 · 콘텐츠 맵(대 3 / 소 12 / 실행 60, 톤 통일·표 양식)</p>
+      <h3 style="margin-top:14px;color:var(--dim)">제외</h3>
+      <p>고객 분석 기둥</p>
+    </div>
+    <h3 style="margin:24px 0 8px;font-size:15px;color:var(--dim)">다음 순서 (미작성 4단계)</h3>
+    <div class="timeline">
+      <div class="tl next"><div class="mk">4</div><div class="body"><b>Key Message</b><span>후보: "AI 시대에 맞게 성장하세요" / "AI에게 일을 시키려면 본질부터 챙기세요" — 우선순위 컨셉 확정 후 결정</span></div></div>
+      <div class="tl next"><div class="mk">5</div><div class="body"><b>실행 컨셉</b><span>AI 그로스 플레이북 / 데이터 분석 토크 — 위 12개 컨셉 기준으로 재설계 필요</span></div></div>
+      <div class="tl next"><div class="mk">6</div><div class="body"><b>컨셉 세부설명</b></div></div>
+      <div class="tl next"><div class="mk">7</div><div class="body"><b>세부 액션 아이템</b></div></div>
+    </div>
+  </section>
+
+  <footer>마켓핏랩 솔루션즈 — 브랜드 &amp; 콘텐츠 전략 프레임워크 · 작업 정리본</footer>
+</div>
+
+<script>
+  // active TOC highlight
+  const links = [...document.querySelectorAll('.toc a')];
+  const map = {}; links.forEach(a => map[a.getAttribute('href').slice(1)] = a);
+  const obs = new IntersectionObserver((es) => {
+    es.forEach(e => { if (e.isIntersecting) {
+      links.forEach(l => l.style.color = '');
+      const a = map[e.target.id]; if (a) { a.style.color = '#4f8cff'; a.style.background = '#1c232d'; }
+    }});
+  }, { rootMargin: '-10% 0px -80% 0px' });
+  document.querySelectorAll('section').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
